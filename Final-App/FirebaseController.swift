@@ -10,16 +10,14 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class FirebaseController: NSObject, DatabaseProtocol {
-    func addListener(listener: any DatabaseListener) {
-        
-    }
+
     
     var listeners = MulticastDelegate<DatabaseListener>()
     var authController: Auth
     var database: Firestore
     var usersRef: CollectionReference?
     var currentUser: FirebaseAuth.User?
-    var userData: User?
+    var userData = User()
     var authenticationListener: AuthenticationListener?
     
     override init(){
@@ -29,14 +27,14 @@ class FirebaseController: NSObject, DatabaseProtocol {
         super.init()
         
     }
-    /*
+    
     func addListener(listener: DatabaseListener){
         listeners.addDelegate(listener)
         
         if listener.listenerType == .user || listener.listenerType == .all {
-            listener.onUserChange(change: .update, currentUser: currentUser!)
+            listener.onUserChange(change: .update, currentUser: userData)
         }
-    }*/
+    }
     func removeListener(listener: DatabaseListener){
         listeners.removeDelegate(listener)
     }
@@ -44,6 +42,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         let currentUser = User()
         currentUser.email = email
         currentUser.name = name
+        currentUser.userId = documentId
         usersRef = database.collection("users")
         do{
             if let userRef = try usersRef?.document(documentId).setData(from: currentUser){
@@ -71,11 +70,12 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 
                 //let user = User()
                 self.currentUser = authResult.user
-                self.setupUserListener()
                 self.userData = addUser(documentId: authResult.user.uid,email: email,name: name)
+                
                 DispatchQueue.main.async {
                     self.authenticationListener?.signUpSuccess()
                 }
+                self.setupUserListener()
                 
                 /*if let userRef = try await usersRef?.addDocument(data: ["team" : addTeam(teamName: authResult.user.uid)]){
                     user.id = userRef.documentID
@@ -112,38 +112,32 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     func setupUserListener(){
         usersRef = database.collection("users")
-        guard let userEmail = currentUser?.email else{
+        guard let userId = currentUser?.uid else{
             return
         }
-        usersRef?.whereField("email", isEqualTo: userEmail).addSnapshotListener{
+        usersRef?.whereField("userId", isEqualTo: userId).addSnapshotListener{
             (querySnapshot,error) in
             guard let querySnapshot = querySnapshot, let userSnapshot = querySnapshot.documents.first else{
-                print("Error fetching teams: \(error!)")
+                print("Error fetching User: \(error!)")
                 return
             }
-            self.parseUsersSnapshot(snapshot: querySnapshot)
+            self.parseUsersSnapshot(snapshot: userSnapshot)
         }
     }
     
-    func parseUsersSnapshot(snapshot: QuerySnapshot){
-        guard let currentUser = self.userData else{
-            return
-        }
+    func parseUsersSnapshot(snapshot: QueryDocumentSnapshot){
+        userData = User()
+        userData.name = snapshot.data()["name"] as? String
+        userData.userId = snapshot.data()["userId"] as? String
+        userData.email = snapshot.data()["email"] as? String
+        userData.id = snapshot.documentID
         
-        snapshot.documentChanges.forEach{(change) in
-            var user : User
-            do {
-                user = try change.document.data(as: User.self)
-            } catch {
-                fatalError("Unable to decode hero: \(error.localizedDescription)")
-            }
-            listeners.invoke{ (listener) in
-                if listener.listenerType == ListenerType.user || listener.listenerType == ListenerType.all {
-                    guard let userData = self.userData else{
-                        return
-                    }
+        
+        listeners.invoke{ (listener) in
+            if listener.listenerType == ListenerType.user || listener.listenerType == ListenerType.all {
+                listener.onUserChange(change: .update, currentUser: userData)
                 }
             }
-        }
+        
     }
 }

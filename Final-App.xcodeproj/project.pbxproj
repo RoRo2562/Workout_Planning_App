@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40007BD62BE08FAE00F90F8B /* ExercisesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40007BD52BE08FAE00F90F8B /* ExercisesTableViewController.swift */; };
+		40007BD82BE0914A00F90F8B /* ExercisesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40007BD72BE0914A00F90F8B /* ExercisesData.swift */; };
+		40007BDA2BE0B53D00F90F8B /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40007BD92BE0B53D00F90F8B /* FoodData.swift */; };
 		40C802122BD760C200685252 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802112BD760C200685252 /* AppDelegate.swift */; };
 		40C802142BD760C200685252 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802132BD760C200685252 /* SceneDelegate.swift */; };
 		40C802162BD760C200685252 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802152BD760C200685252 /* ViewController.swift */; };
@@ -52,6 +55,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		40007BD52BE08FAE00F90F8B /* ExercisesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesTableViewController.swift; sourceTree = "<group>"; };
+		40007BD72BE0914A00F90F8B /* ExercisesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExercisesData.swift; sourceTree = "<group>"; };
+		40007BD92BE0B53D00F90F8B /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		40C8020E2BD760C200685252 /* Final-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C802112BD760C200685252 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40C802132BD760C200685252 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +149,9 @@
 				40C802692BD7A1A900685252 /* DisplayMessage.swift */,
 				40C8026D2BD7A7BF00685252 /* GoogleService-Info.plist */,
 				40C8026F2BD7ADA100685252 /* HomeViewController.swift */,
+				40007BD52BE08FAE00F90F8B /* ExercisesTableViewController.swift */,
+				40007BD92BE0B53D00F90F8B /* FoodData.swift */,
+				40007BD72BE0914A00F90F8B /* ExercisesData.swift */,
 			);
 			path = "Final-App";
 			sourceTree = "<group>";
@@ -263,8 +272,11 @@
 				40C8022E2BD76E5A00685252 /* FirebaseController.swift in Sources */,
 				40C802162BD760C200685252 /* ViewController.swift in Sources */,
 				40C8026A2BD7A1A900685252 /* DisplayMessage.swift in Sources */,
+				40007BD62BE08FAE00F90F8B /* ExercisesTableViewController.swift in Sources */,
 				40C802122BD760C200685252 /* AppDelegate.swift in Sources */,
+				40007BD82BE0914A00F90F8B /* ExercisesData.swift in Sources */,
 				40C8026C2BD7A49800685252 /* SignUpViewController.swift in Sources */,
+				40007BDA2BE0B53D00F90F8B /* FoodData.swift in Sources */,
 				40C802682BD7730B00685252 /* MulticastDelegate.swift in Sources */,
 				40C802262BD7631100685252 /* SignInViewController.swift in Sources */,
 				40C802702BD7ADA100685252 /* HomeViewController.swift in Sources */,

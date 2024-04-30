@@ -6,16 +6,25 @@
 //
 
 import UIKit
+import Firebase
 
-class HomeViewController: UIViewController,DatabaseListener {
+class HomeViewController: UIViewController, DatabaseListener {
+    var currentUser = User()
     func onUserChange(change: DatabaseChange, currentUser: User) {
-        let name = currentUser.name
+        self.currentUser = currentUser
+        if let currentName = currentUser.name{
+            welcomeLabel.text = "Welcome " + currentName
+        }
+        
     }
+    @IBAction func toExercises(_ sender: Any) {
+
+    }
+    
     
 
     
     var listenerType: ListenerType = .user
-    var currentUser: User = User()
     weak var databaseController: DatabaseProtocol?
     @IBOutlet weak var welcomeLabel: UILabel!
     
@@ -25,14 +34,21 @@ class HomeViewController: UIViewController,DatabaseListener {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
-        guard let name = currentUser.name else{
-            return
-        }
-        welcomeLabel.text = "Welcome" + "name"
+        
+        
         //welcomeLabel.text
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
 
     /*
     // MARK: - Navigation
