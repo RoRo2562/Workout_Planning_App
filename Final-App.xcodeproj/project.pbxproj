@@ -14,6 +14,7 @@
 		401F29502BE773620066FC1C /* AddWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F294F2BE773620066FC1C /* AddWorkoutViewController.swift */; };
 		401F29552BE781240066FC1C /* ExerciseSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29532BE781240066FC1C /* ExerciseSetTableViewCell.swift */; };
 		401F29562BE781240066FC1C /* ExerciseSetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401F29542BE781240066FC1C /* ExerciseSetTableViewCell.xib */; };
+		401F29582BE8B50D0066FC1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C802172BD760C200685252 /* Main.storyboard */; };
 		40C802122BD760C200685252 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802112BD760C200685252 /* AppDelegate.swift */; };
 		40C802142BD760C200685252 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802132BD760C200685252 /* SceneDelegate.swift */; };
 		40C802162BD760C200685252 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802152BD760C200685252 /* ViewController.swift */; };
@@ -270,6 +271,7 @@
 				40C8021B2BD760C500685252 /* Assets.xcassets in Resources */,
 				40C8026E2BD7A7BF00685252 /* GoogleService-Info.plist in Resources */,
 				40C8021E2BD760C500685252 /* Base in Resources */,
+				401F29582BE8B50D0066FC1C /* Main.storyboard in Resources */,
 				40C802192BD760C200685252 /* Base in Resources */,
 				401F29562BE781240066FC1C /* ExerciseSetTableViewCell.xib in Resources */,
 			);

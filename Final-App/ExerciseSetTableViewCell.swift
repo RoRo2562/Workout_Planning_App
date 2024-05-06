@@ -17,10 +17,10 @@ class ExerciseSetTableViewCell: UITableViewCell {
     static let indentifier = "ExerciseSetCell"
     
     static func nib() -> UINib {
-        return UINib(nibName: indentifier, bundle: nil)
+        return UINib(nibName: "ExerciseSetCell", bundle: nil)
     }
     
-    public func configure(setIndex: Int){
+    public func configure(with setIndex: Int){
         setNumber.titleLabel?.text = String(setIndex)
     }
     

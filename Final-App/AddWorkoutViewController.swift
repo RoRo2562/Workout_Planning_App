@@ -54,7 +54,7 @@ extension AddWorkoutViewController : UITableViewDataSource {
         
         if indexPath.row > 1 {
             let setCell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.indentifier, for: indexPath) as! ExerciseSetTableViewCell
-            setCell.configure(setIndex: indexPath.row)
+            setCell.configure(with: indexPath.row)
             return setCell
         }
         
