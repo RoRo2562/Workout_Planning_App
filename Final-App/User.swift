@@ -11,6 +11,7 @@ enum CodingKeys: String, Codable{
     case id
     case name
     case email
+    case userId
 }
 class User: NSObject,Codable {
     @DocumentID var id: String?
