@@ -9,7 +9,7 @@ import UIKit
 
 class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
 {
-    var newFood = [FoodData]()
+    var newExercise = [ExercisesData]()
     let CELL_EXERCISE = "exerciseCell"
     var indicator = UIActivityIndicatorView()
     weak var databaseController: DatabaseProtocol?
@@ -53,7 +53,7 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return newFood.count
+        return newExercise.count
     }
     
     func requestExercises(_ exercises:String) async {
@@ -71,18 +71,20 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
             print("Invalid URL.")
             return
         }*/
+        
         let query = exercises.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let url = URL(string: "https://api.api-ninjas.com/v1/nutrition?query="+query!)!
+        let url = URL(string: "https://api.api-ninjas.com/v1/exercises?muscle="+query!)!
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("++z2KwnT+PXKDZLnHzEN9Q==z7IB8lELs2QgxqlE", forHTTPHeaderField: "X-Api-Key")
         do {
             let (data,response) = try await URLSession.shared.data(for: urlRequest)
+            indicator.stopAnimating()
             let decoder = JSONDecoder()
             print(String(decoding: data, as: UTF8.self))
-            let foodData = try decoder.decode([FoodData].self, from: data)
-            let startIndex = newFood.count
-            for food in foodData{
-                newFood.append(food)
+            let exerciseData = try decoder.decode([ExercisesData].self, from: data)
+            let startIndex = newExercise.count
+            for exercise in exerciseData{
+                newExercise.append(exercise)
             }
             tableView.reloadData()
             /*
@@ -113,6 +115,7 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
         guard let searchText = searchBar.text
         else{return}
         navigationItem.searchController?.dismiss(animated: true)
+        indicator.startAnimating()
         Task {
             URLSession.shared.invalidateAndCancel()
             currentRequestIndex = 0
@@ -124,9 +127,9 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_EXERCISE, for: indexPath)
         
-        let food = newFood[indexPath.row]
-        cell.textLabel?.text = food.name
-        cell.detailTextLabel?.text = String(food.calories)
+        let exercise = newExercise[indexPath.row]
+        cell.textLabel?.text = exercise.name
+        cell.detailTextLabel?.text = exercise.muscle
 
         // Configure the cell...
 

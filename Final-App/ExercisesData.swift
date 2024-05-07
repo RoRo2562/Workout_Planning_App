@@ -9,24 +9,24 @@ import UIKit
 
 class ExercisesData: NSObject,Decodable {
     var name : String
-    var bodyPart : String
-    var equipmet : String
-    var target : String
+    var muscle : String
+    var equipment : String
+    var difficulty : String
     
     private enum CodingKeys: CodingKey {
         case name
-        case bodyPart
-        case equipmet
-        case target
+        case muscle
+        case equipment
+        case difficulty
 
     }
     
     required init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.name = try container.decode(String.self, forKey: .name)
-        self.bodyPart = try container.decode(String.self, forKey: .bodyPart)
-        self.equipmet = try container.decode(String.self, forKey: .equipmet)
-        self.target = try container.decode(String.self, forKey: .target)
+        self.muscle = try container.decode(String.self, forKey: .muscle)
+        self.equipment = try container.decode(String.self, forKey: .equipment)
+        self.difficulty = try container.decode(String.self, forKey: .difficulty)
 
     }
 

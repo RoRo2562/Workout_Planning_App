@@ -104,15 +104,17 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
     }
 
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_FOOD, for: indexPath)
+        let food = newFood[indexPath.row]
+        cell.textLabel?.text = food.name
+        cell.detailTextLabel?.text = String(food.calories) + " calories"
         // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
