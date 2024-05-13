@@ -15,6 +15,10 @@
 		401F29552BE781240066FC1C /* ExerciseSetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29532BE781240066FC1C /* ExerciseSetTableViewCell.swift */; };
 		401F29562BE781240066FC1C /* ExerciseSetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401F29542BE781240066FC1C /* ExerciseSetTableViewCell.xib */; };
 		401F29582BE8B50D0066FC1C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C802172BD760C200685252 /* Main.storyboard */; };
+		401F295B2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29592BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift */; };
+		401F295C2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401F295A2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib */; };
+		401F29622BEA11B40066FC1C /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29612BEA11B40066FC1C /* ExerciseSet.swift */; };
+		401F29642BEA12590066FC1C /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29632BEA12590066FC1C /* Workout.swift */; };
 		40C802122BD760C200685252 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802112BD760C200685252 /* AppDelegate.swift */; };
 		40C802142BD760C200685252 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802132BD760C200685252 /* SceneDelegate.swift */; };
 		40C802162BD760C200685252 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802152BD760C200685252 /* ViewController.swift */; };
@@ -67,6 +71,10 @@
 		401F294F2BE773620066FC1C /* AddWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWorkoutViewController.swift; sourceTree = "<group>"; };
 		401F29532BE781240066FC1C /* ExerciseSetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetTableViewCell.swift; sourceTree = "<group>"; };
 		401F29542BE781240066FC1C /* ExerciseSetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseSetTableViewCell.xib; sourceTree = "<group>"; };
+		401F29592BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetTitleTableViewCell.swift; sourceTree = "<group>"; };
+		401F295A2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseSetTitleTableViewCell.xib; sourceTree = "<group>"; };
+		401F29612BEA11B40066FC1C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
+		401F29632BEA12590066FC1C /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		40C8020E2BD760C200685252 /* Final-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C802112BD760C200685252 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40C802132BD760C200685252 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +163,7 @@
 				40C8021F2BD760C500685252 /* Info.plist */,
 				40C8022D2BD76E5A00685252 /* FirebaseController.swift */,
 				40C802652BD7716F00685252 /* User.swift */,
+				401F29612BEA11B40066FC1C /* ExerciseSet.swift */,
 				40C802692BD7A1A900685252 /* DisplayMessage.swift */,
 				40C8026D2BD7A7BF00685252 /* GoogleService-Info.plist */,
 				40C8026F2BD7ADA100685252 /* HomeViewController.swift */,
@@ -165,6 +174,9 @@
 				401F294F2BE773620066FC1C /* AddWorkoutViewController.swift */,
 				401F29532BE781240066FC1C /* ExerciseSetTableViewCell.swift */,
 				401F29542BE781240066FC1C /* ExerciseSetTableViewCell.xib */,
+				401F29592BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift */,
+				401F295A2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib */,
+				401F29632BEA12590066FC1C /* Workout.swift */,
 			);
 			path = "Final-App";
 			sourceTree = "<group>";
@@ -272,6 +284,7 @@
 				40C8026E2BD7A7BF00685252 /* GoogleService-Info.plist in Resources */,
 				40C8021E2BD760C500685252 /* Base in Resources */,
 				401F29582BE8B50D0066FC1C /* Main.storyboard in Resources */,
+				401F295C2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib in Resources */,
 				40C802192BD760C200685252 /* Base in Resources */,
 				401F29562BE781240066FC1C /* ExerciseSetTableViewCell.xib in Resources */,
 			);
@@ -287,6 +300,7 @@
 				40C8022E2BD76E5A00685252 /* FirebaseController.swift in Sources */,
 				40C802162BD760C200685252 /* ViewController.swift in Sources */,
 				40C8026A2BD7A1A900685252 /* DisplayMessage.swift in Sources */,
+				401F29642BEA12590066FC1C /* Workout.swift in Sources */,
 				40007BD62BE08FAE00F90F8B /* ExercisesTableViewController.swift in Sources */,
 				40C802122BD760C200685252 /* AppDelegate.swift in Sources */,
 				40007BD82BE0914A00F90F8B /* ExercisesData.swift in Sources */,
@@ -297,6 +311,8 @@
 				40C802682BD7730B00685252 /* MulticastDelegate.swift in Sources */,
 				40C802262BD7631100685252 /* SignInViewController.swift in Sources */,
 				40C802702BD7ADA100685252 /* HomeViewController.swift in Sources */,
+				401F295B2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift in Sources */,
+				401F29622BEA11B40066FC1C /* ExerciseSet.swift in Sources */,
 				401F29502BE773620066FC1C /* AddWorkoutViewController.swift in Sources */,
 				40C802142BD760C200685252 /* SceneDelegate.swift in Sources */,
 				40C802292BD768E600685252 /* DatabaseProtocol.swift in Sources */,

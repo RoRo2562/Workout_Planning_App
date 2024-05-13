@@ -8,7 +8,7 @@
 import UIKit
 
 class ExerciseSetTableViewCell: UITableViewCell {
-    @IBOutlet weak var setNumber: UIButton!
+    @IBOutlet weak var setNumber: UILabel!
     
     @IBOutlet weak var kgTextField: UITextField!
     
@@ -16,12 +16,9 @@ class ExerciseSetTableViewCell: UITableViewCell {
     
     static let indentifier = "ExerciseSetCell"
     
-    static func nib() -> UINib {
-        return UINib(nibName: "ExerciseSetCell", bundle: nil)
-    }
     
     public func configure(with setIndex: Int){
-        setNumber.titleLabel?.text = String(setIndex)
+        setNumber.text = String(setIndex)
     }
     
     override func awakeFromNib() {

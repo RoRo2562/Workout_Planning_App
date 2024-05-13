@@ -12,11 +12,14 @@ enum CodingKeys: String, Codable{
     case name
     case email
     case userId
+    case workouts
+
 }
 class User: NSObject,Codable {
     @DocumentID var id: String?
     var userId : String?
     var email: String?
     var name: String?
+    var workouts: [Workout] = []
    // var workout: Workout?
 }

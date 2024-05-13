@@ -15,6 +15,10 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
     weak var databaseController: DatabaseProtocol?
     var currentRequestIndex: Int = 0
     let MAX_ITEMS_PER_REQUEST = 40
+    var exerciseSets: [ExerciseSet] = []
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchController = UISearchController(searchResultsController: nil)
@@ -110,8 +114,6 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
 
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        //newBooks.removeAll(where: <#T##(BookData) throws -> Bool#>)
-        //tableView.reloadData()
         guard let searchText = searchBar.text
         else{return}
         navigationItem.searchController?.dismiss(animated: true)
@@ -136,7 +138,23 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
         return cell
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let exerciseSet = ExerciseSet()
+        let exercise = newExercise[indexPath.row]
+        exerciseSet.exerciseName = exercise.name
+        exerciseSet.exerciseTarget = exercise.muscle
+        exerciseSet.exerciseDifficulty = exercise.difficulty
+        exerciseSet.exerciseEquipment = exercise.equipment
+        exerciseSet.exerciseInstructions = exercise.instructions
+        exerciseSet.setReps = []
+        exerciseSet.setWeight = []
+        self.exerciseSets.append(exerciseSet)
+        performSegue(withIdentifier: "returnExerciseSetsSegue", sender: self)
+        
+        
+    }
+    
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -181,5 +199,32 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
         // Pass the selected object to the new view controller.
     }
     */
+    /*
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            // Get the new view controller using segue.destination.
+            // Pass the selected object to the new view controller.
+            let destinationVC = segue.destination as! AddWorkoutViewController
+            
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let exerciseSet = ExerciseSet()
+                let exercise = newExercise[indexPath.row]
+                exerciseSet.exerciseName = exercise.name
+                exerciseSet.exerciseTarget = exercise.muscle
+                exerciseSet.exerciseDifficulty = exercise.difficulty
+                exerciseSet.exerciseEquipment = exercise.equipment
+                exerciseSet.exerciseInstructions = exercise.instructions
+                exerciseSet.setReps = []
+                exerciseSet.setWeight = []
+                
+                self.exerciseSets.append(exerciseSet)
+                navigationController?.popViewController(animated: true)
+                destinationVC.exercise_sets = exerciseSets
+
+                
+            }
+            
+        }*/
+
+    
 
 }

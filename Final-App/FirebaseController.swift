@@ -16,7 +16,9 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var authController: Auth
     var database: Firestore
     var usersRef: CollectionReference?
+    var workoutsRef: CollectionReference?
     var currentUser: FirebaseAuth.User?
+    var currentWorkout: Workout?
     var userData = User()
     var authenticationListener: AuthenticationListener?
     
@@ -43,6 +45,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         currentUser.email = email
         currentUser.name = name
         currentUser.userId = documentId
+        currentUser.workouts = []
         usersRef = database.collection("users")
         do{
             if let userRef = try usersRef?.document(documentId).setData(from: currentUser){
@@ -54,6 +57,38 @@ class FirebaseController: NSObject, DatabaseProtocol {
             currentUser.id = userRef.documentID
         }*/
         return currentUser
+    }
+    
+    func addWorkout(newWorkoutName : String , newExerciseSets : [ExerciseSet]) -> Workout{
+        let newWorkout = Workout()
+        newWorkout.workoutName = newWorkoutName
+        newWorkout.exerciseSets = newExerciseSets
+        workoutsRef = database.collection("workouts")
+        let user = Auth.auth().currentUser
+        if let userId = user?.uid {
+            usersRef = database.collection("users")
+    
+            do {
+                if let workoutsRef = try workoutsRef?.addDocument(from: newWorkout){
+                    newWorkout.id = workoutsRef.documentID
+                    usersRef?.document(userId).updateData(["workouts" : FieldValue.arrayUnion([newWorkout])])
+                }
+            } catch {
+                print("Failed to serialize workout")
+            }
+        }
+        return newWorkout
+    }
+    
+    func addExerciseToWorkout(exercise: ExercisesData) {
+        let exerciseSet = ExerciseSet()
+        exerciseSet.exerciseName = exercise.name
+        exerciseSet.exerciseTarget = exercise.muscle
+        exerciseSet.exerciseDifficulty = exercise.difficulty
+        exerciseSet.exerciseEquipment = exercise.equipment
+        exerciseSet.exerciseInstructions = exercise.instructions
+        exerciseSet.setReps = []
+        exerciseSet.setWeight = []
     }
     
     

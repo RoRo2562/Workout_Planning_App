@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ExerciseSetTitleTableViewCell" customModule="Final_App" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="543" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="543" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDO-DR-8DF">
+                        <rect key="frame" x="27.999999999999993" y="10" width="97.333333333333314" height="30"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" systemColor="systemPinkColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reps" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saj-K5-UgE">
+                        <rect key="frame" x="455" y="10" width="40.666666666666686" height="30"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" systemColor="systemPinkColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weight" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptv-1U-4Gu">
+                        <rect key="frame" x="334.66666666666669" y="10" width="57.666666666666686" height="30"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" systemColor="systemPinkColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="saj-K5-UgE" secondAttribute="bottom" constant="10" id="16n-Ay-uXy"/>
+                    <constraint firstItem="gDO-DR-8DF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="BJt-Ps-fbT"/>
+                    <constraint firstItem="gDO-DR-8DF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="28" id="GjD-0s-Yr2"/>
+                    <constraint firstAttribute="bottom" secondItem="gDO-DR-8DF" secondAttribute="bottom" constant="10" id="QDK-df-ZhP"/>
+                    <constraint firstItem="saj-K5-UgE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="YWx-uH-SFe"/>
+                    <constraint firstAttribute="trailing" secondItem="saj-K5-UgE" secondAttribute="trailing" constant="47.5" id="cch-pr-Pgm"/>
+                    <constraint firstItem="ptv-1U-4Gu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="g0w-uh-YUI"/>
+                    <constraint firstItem="saj-K5-UgE" firstAttribute="leading" secondItem="ptv-1U-4Gu" secondAttribute="trailing" constant="62.5" id="klG-Me-mtE"/>
+                    <constraint firstAttribute="bottom" secondItem="ptv-1U-4Gu" secondAttribute="bottom" constant="10" id="nFw-aD-1tH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="309.16030534351142" y="19.718309859154932"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
