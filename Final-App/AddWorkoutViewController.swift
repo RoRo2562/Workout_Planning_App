@@ -7,7 +7,12 @@
 
 import UIKit
 
-class AddWorkoutViewController: UIViewController,DatabaseListener {
+class AddWorkoutViewController: UIViewController,DatabaseListener, ExerciseAddedDelegate {
+    func exercisesAdded(_ exerciseSet: ExerciseSet) {
+        self.exercise_sets.append(exerciseSet)
+        exercisesTableView.reloadData()
+    }
+    
     var listenerType: ListenerType = .user
     var currentUser = User()
     
@@ -24,13 +29,7 @@ class AddWorkoutViewController: UIViewController,DatabaseListener {
     var exercise_sets = [ExerciseSet]()
     
     @IBAction func addExerciseToWorkout(_ sender: Any) {
-         func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            if segue.identifier == "addExerciseSegue"{
-                let destination = segue.destination as! ExercisesTableViewController
-                destination.exerciseSets = self.exercise_sets
-            }
-            
-        }
+         
     }
     
     @IBAction func unwind( _ seg: UIStoryboardSegue) {
@@ -53,6 +52,7 @@ class AddWorkoutViewController: UIViewController,DatabaseListener {
         super.viewDidLoad()
         let appDelegate = (UIApplication.shared.delegate as? AppDelegate)
         databaseController = appDelegate?.databaseController
+        
         exercisesTableView.register(UINib(nibName: "ExerciseSetTableViewCell", bundle: nil),forCellReuseIdentifier: ExerciseSetTableViewCell.indentifier)
         exercisesTableView.register(UINib(nibName: "ExerciseSetTitleTableViewCell", bundle: nil), forCellReuseIdentifier: ExerciseSetTitleTableViewCell.identifier)
         exercisesTableView.delegate = self
@@ -106,8 +106,7 @@ extension AddWorkoutViewController : UITableViewDataSource {
             return titleCell
         }
         if indexPath.row == (exercise_sets[indexPath.section].setReps?.count ?? 0) + 2{
-            let addSetCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            addSetCell.textLabel?.text = "Add a set"
+            let addSetCell = tableView.dequeueReusableCell(withIdentifier: "addSetCell", for: indexPath)
             return addSetCell
         }
         
@@ -137,6 +136,14 @@ extension AddWorkoutViewController : UITableViewDataSource {
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       if segue.identifier == "addExerciseSegue"{
+           let destination = segue.destination as! ExercisesTableViewController
+           destination.delegate = self
+       }
+       
+   }
     
     
 }

@@ -7,13 +7,21 @@
 
 import UIKit
 
+protocol FoodAddedDelegate: AnyObject{
+    func foodAdded(_ foodItem: FoodData, _ mealSection: Int)
+}
+
 class FoodTableViewController: UITableViewController,UISearchBarDelegate {
     var newFood = [FoodData]()
+    var mealAddedTo: Int = 0
     let CELL_FOOD = "foodCell"
     var indicator = UIActivityIndicatorView()
     weak var databaseController: DatabaseProtocol?
     var currentRequestIndex: Int = 0
     let MAX_ITEMS_PER_REQUEST = 40
+    weak var delegate: FoodAddedDelegate?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchController = UISearchController(searchResultsController: nil)
@@ -113,6 +121,15 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
         // Configure the cell...
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let foodItem = newFood[indexPath.row]
+        delegate?.foodAdded(foodItem, mealAddedTo)
+        //performSegue(withIdentifier: "returnExerciseSetsSegue", sender: self)
+        navigationController?.popViewController(animated: true)
+        
+        
     }
     
 

@@ -19,6 +19,7 @@
 		401F295C2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 401F295A2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib */; };
 		401F29622BEA11B40066FC1C /* ExerciseSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29612BEA11B40066FC1C /* ExerciseSet.swift */; };
 		401F29642BEA12590066FC1C /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29632BEA12590066FC1C /* Workout.swift */; };
+		401F29662BF31E3E0066FC1C /* NutritionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401F29652BF31E3E0066FC1C /* NutritionViewController.swift */; };
 		40C802122BD760C200685252 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802112BD760C200685252 /* AppDelegate.swift */; };
 		40C802142BD760C200685252 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802132BD760C200685252 /* SceneDelegate.swift */; };
 		40C802162BD760C200685252 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C802152BD760C200685252 /* ViewController.swift */; };
@@ -75,6 +76,7 @@
 		401F295A2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseSetTitleTableViewCell.xib; sourceTree = "<group>"; };
 		401F29612BEA11B40066FC1C /* ExerciseSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSet.swift; sourceTree = "<group>"; };
 		401F29632BEA12590066FC1C /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		401F29652BF31E3E0066FC1C /* NutritionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionViewController.swift; sourceTree = "<group>"; };
 		40C8020E2BD760C200685252 /* Final-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Final-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C802112BD760C200685252 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40C802132BD760C200685252 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 				40007BD92BE0B53D00F90F8B /* FoodData.swift */,
 				40007BD72BE0914A00F90F8B /* ExercisesData.swift */,
 				401F294F2BE773620066FC1C /* AddWorkoutViewController.swift */,
+				401F29652BF31E3E0066FC1C /* NutritionViewController.swift */,
 				401F29532BE781240066FC1C /* ExerciseSetTableViewCell.swift */,
 				401F29542BE781240066FC1C /* ExerciseSetTableViewCell.xib */,
 				401F29592BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift */,
@@ -297,6 +300,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				401F29662BF31E3E0066FC1C /* NutritionViewController.swift in Sources */,
 				40C8022E2BD76E5A00685252 /* FirebaseController.swift in Sources */,
 				40C802162BD760C200685252 /* ViewController.swift in Sources */,
 				40C8026A2BD7A1A900685252 /* DisplayMessage.swift in Sources */,

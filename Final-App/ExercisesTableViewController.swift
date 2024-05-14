@@ -6,6 +6,9 @@
 //
 
 import UIKit
+protocol ExerciseAddedDelegate: AnyObject{
+    func exercisesAdded(_ exerciseSet: ExerciseSet)
+}
 
 class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
 {
@@ -16,6 +19,8 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
     var currentRequestIndex: Int = 0
     let MAX_ITEMS_PER_REQUEST = 40
     var exerciseSets: [ExerciseSet] = []
+    
+    weak var delegate: ExerciseAddedDelegate?
     
     
     
@@ -149,7 +154,9 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
         exerciseSet.setReps = []
         exerciseSet.setWeight = []
         self.exerciseSets.append(exerciseSet)
-        performSegue(withIdentifier: "returnExerciseSetsSegue", sender: self)
+        delegate?.exercisesAdded(exerciseSet)
+        //performSegue(withIdentifier: "returnExerciseSetsSegue", sender: self)
+        navigationController?.popViewController(animated: true)
         
         
     }

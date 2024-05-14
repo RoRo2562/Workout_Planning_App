@@ -13,6 +13,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
 
     
     var listeners = MulticastDelegate<DatabaseListener>()
+    var workoutList: [Workout] = []
     var authController: Auth
     var database: Firestore
     var usersRef: CollectionReference?
@@ -145,6 +146,15 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    func getWorkoutByID(_ id:String) -> Workout?{
+        for workout in workoutList{
+            if workout.id == id{
+                return workout
+            }
+        }
+        return nil
+    }
+    
     func setupUserListener(){
         usersRef = database.collection("users")
         guard let userId = currentUser?.uid else{
@@ -175,4 +185,23 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
         
     }
+    /*
+    func parseWorkoutSnapshot(snapshot: QueryDocumentSnapshot){
+        guard let loggedUser = currentUser else{
+            return
+        }
+        userData = User()
+        userData.email = snapshot.data()["email"] as? String
+        userData.name = snapshot.data()["name"] as? String
+        userData.userId = snapshot.data()["userId"] as? String
+        userData.id = snapshot.documentID
+        if let workoutReferences = snapshot.data()["workouts"] as? [DocumentReference] {
+            for reference in workoutReferences {
+                if let workout = getWorkoutByID(reference.documentID){
+                    userData.workouts.append(workout)
+                }
+            }
+        }
+        
+    }*/
 }
