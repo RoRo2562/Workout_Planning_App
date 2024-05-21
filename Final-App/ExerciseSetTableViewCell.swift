@@ -25,14 +25,20 @@ class ExerciseSetTableViewCell: UITableViewCell {
     
     
     
-    public func configure(with setIndex: Int){
+    public func configure(with setIndex: Int, delegate: cellTextFieldDelegate){
         setNumber.text = String(setIndex)
-        kgTextField.delegate = self
-        repsTextField.delegate = self
+//        kgTextField.delegate = self
+//        repsTextField.delegate = self
+    }
+    
+    override func prepareForReuse() {
+        kgTextField.delegate = nil
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        kgTextField.tag = 0
+        repsTextField.tag = 1
         // Initialization code
     }
 

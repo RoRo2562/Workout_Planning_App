@@ -10,7 +10,9 @@ import UIKit
 class WorkoutsViewController: UIViewController,DatabaseListener {
     func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
         myworkouts = workouts
-        //workoutsTableView.reloadData()
+        DispatchQueue.main.async {
+            self.workoutsTableView.reloadData()
+        }
     }
     
     

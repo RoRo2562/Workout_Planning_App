@@ -7,7 +7,11 @@
 
 import UIKit
 
-class WorkoutViewController: UIViewController {
+class WorkoutViewController: UIViewController, cellTextFieldDelegate {
+    func updateExerciseSet(with kgText: Int?, repsText: Int?, for cell: ExerciseSetTableViewCell) {
+        
+    }
+    
     @IBOutlet weak var workoutTableView: UITableView!
     var currentWorkout: Workout?
     
@@ -76,7 +80,7 @@ extension WorkoutViewController : UITableViewDataSource {
         
         if indexPath.row > 1{
             let setCell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.indentifier, for: indexPath) as! ExerciseSetTableViewCell
-            setCell.configure(with: indexPath.row-1)
+            setCell.configure(with: indexPath.row-1, delegate: self)
             let currentExercise = currentWorkout?.exerciseSets[indexPath.section].setReps?[indexPath.row - 2]
             setCell.kgTextField.text = "2"
             return setCell

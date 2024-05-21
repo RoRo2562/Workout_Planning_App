@@ -13,6 +13,7 @@ protocol ExerciseAddedDelegate: AnyObject{
 class ExercisesTableViewController: UITableViewController,UISearchBarDelegate, UISearchResultsUpdating
 {
     var newExercise = [ExercisesData]()
+    var exerciseDetail: ExercisesData?
     let CELL_EXERCISE = "exerciseCell"
     var indicator = UIActivityIndicatorView()
     weak var databaseController: DatabaseProtocol?
@@ -207,6 +208,7 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate, U
         let exercise = filteredExerciseData[indexPath.row]
         cell.textLabel?.text = exercise.name
         cell.detailTextLabel?.text = exercise.muscle
+        //cell.configure(text: exercise.name , delegate: self)
 
         // Configure the cell...
 
@@ -215,7 +217,7 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate, U
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let exerciseSet = ExerciseSet()
-        let exercise = newExercise[indexPath.row]
+        let exercise = filteredExerciseData[indexPath.row]
         exerciseSet.exerciseName = exercise.name
         exerciseSet.exerciseTarget = exercise.muscle
         exerciseSet.exerciseDifficulty = exercise.difficulty
@@ -228,6 +230,12 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate, U
         //performSegue(withIdentifier: "returnExerciseSetsSegue", sender: self)
         navigationController?.popViewController(animated: true)
         
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        exerciseDetail = filteredExerciseData[indexPath.row]
+        performSegue(withIdentifier: "viewExerciseSegue", sender: Any?.self)
         
     }
     
@@ -301,6 +309,15 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate, U
             }
             
         }*/
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewExerciseSegue"{
+            let destination = segue.destination as! ExerciseTableViewController
+            destination.currentExercise = exerciseDetail
+
+        }
+        
+    }
 
     
 

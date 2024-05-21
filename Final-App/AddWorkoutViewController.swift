@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddWorkoutViewController: UIViewController,DatabaseListener, ExerciseAddedDelegate, UITextFieldDelegate {
+class AddWorkoutViewController: UIViewController,DatabaseListener, ExerciseAddedDelegate {
 
     
     func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
@@ -136,12 +136,25 @@ extension AddWorkoutViewController : UITableViewDataSource {
         
         if indexPath.row > 1{
             let setCell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.indentifier, for: indexPath) as! ExerciseSetTableViewCell
-            setCell.configure(with: indexPath.row-1)
+            setCell.configure(with: indexPath.row-1, delegate: self)
             setCell.delegate = self
+            var section = indexPath.section + 1
+            var row = indexPath.row + 1
+            var kg = 1
+            var reps = 2
+            setCell.repsTextField.tag = Int("\(reps)0\(section)0\(row)")!
             setCell.repsTextField.delegate = self
+            setCell.kgTextField.tag = Int("\(kg)0\(section)0\(row)")!
             setCell.kgTextField.delegate = self
+            
             setCell.repsTextField.text = String(exercise_sets[indexPath.section].setReps?[indexPath.row - 2] ?? 28)
+            if setCell.repsTextField.text == "0"{
+                setCell.repsTextField.text = nil
+            }
             setCell.kgTextField.text = String(exercise_sets[indexPath.section].setWeight?[indexPath.row - 2] ?? 24)
+            if setCell.kgTextField.text == "0"{
+                setCell.kgTextField.text = nil
+            }
             return setCell
         }
         
@@ -159,8 +172,8 @@ extension AddWorkoutViewController : UITableViewDataSource {
         let number = indexPath.count
         if indexPath.row == (exercise_sets[indexPath.section].setReps?.count ?? 0) + 2{
             let currentExercise = self.exercise_sets[indexPath.section]
-            currentExercise.setReps?.append(13)
-            currentExercise.setWeight?.append(16)
+            currentExercise.setReps?.append(0)
+            currentExercise.setWeight?.append(0)
             exercisesTableView.reloadData()
         }
         
@@ -191,4 +204,23 @@ extension AddWorkoutViewController : UITableViewDataSource {
     
     
     
+}
+
+extension AddWorkoutViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("HI")
+        print(textField.tag)
+        let indexString = "\(textField.tag)"
+        let parts = indexString.components(separatedBy: "0")
+        let type = Int(parts[0])!
+        let row = Int(parts[2])! - 1
+        let section = Int(parts[1])! - 1
+        if type == 1{
+            self.exercise_sets[section].setWeight?[row - 2] = Int(textField.text ?? "88") ?? 97
+        }
+        if type == 2{
+            self.exercise_sets[section].setReps?[row - 2] = Int(textField.text ?? "88") ?? 97
+        }
+        
+    }
 }

@@ -9,7 +9,7 @@ import UIKit
 import FirebaseFirestoreSwift
 
 class Workout: NSObject,Codable {
-    @DocumentID var id: String?
+    var id: String?
     var workoutName: String?
     var userId: String?
     var exerciseSets: [ExerciseSet] = []

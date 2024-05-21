@@ -154,10 +154,13 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     func getWorkoutByID(_ id:String) async -> Workout?{
         workoutsRef = database.collection("workouts")
+        
         do{
             let workoutItem = try await workoutsRef?.document(id).getDocument()
             currentWorkout = Workout()
             let decoder = JSONDecoder()
+            let workout = try workoutItem?.data(as:Workout.self)
+            currentWorkout = workout
             //let data = workoutItem?.data()?["exerciseSets"] as! Array<ExerciseSetData>
             /*
             let data = try decoder.decode([ExerciseSetData].self, from: workoutItem?.data()?["exerciseSets"] as! Data)
@@ -175,8 +178,8 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }*/
             
             //currentWorkout?.exerciseSets = workoutItem?.data()?["exerciseSets"] as! [ExerciseSet]
-            currentWorkout?.userId = workoutItem?.data()?["userId"] as? String
-            currentWorkout?.workoutName = workoutItem?.data()?["workoutName"] as? String
+            //currentWorkout?.userId = workoutItem?.data()?["userId"] as? String
+            //currentWorkout?.workoutName = workoutItem?.data()?["workoutName"] as? String
             return currentWorkout
         } catch{
             return nil

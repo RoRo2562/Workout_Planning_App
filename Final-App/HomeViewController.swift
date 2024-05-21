@@ -9,11 +9,18 @@ import UIKit
 import Firebase
 
 class HomeViewController: UIViewController, DatabaseListener {
+    
+    var listenerType: ListenerType = .user // We want to listen for changes in user logged in
+    weak var databaseController: DatabaseProtocol? // This is the database protocol we need to conform to
+    var currentUser = User() // The current user data in the user class object format
+    @IBOutlet weak var welcomeLabel: UILabel! // Welcome label
+    
+    
     func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
         
     }
     
-    var currentUser = User()
+    // This function implements the functionality of when the user logged in changes
     func onUserChange(change: DatabaseChange, currentUser: User) {
         self.currentUser = currentUser
         if let currentName = currentUser.name{
@@ -24,14 +31,6 @@ class HomeViewController: UIViewController, DatabaseListener {
     @IBAction func toExercises(_ sender: Any) {
 
     }
-    
-    
-
-    
-    var listenerType: ListenerType = .user
-    weak var databaseController: DatabaseProtocol?
-    @IBOutlet weak var welcomeLabel: UILabel!
-    
     
 
     override func viewDidLoad() {
