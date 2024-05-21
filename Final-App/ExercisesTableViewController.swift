@@ -10,7 +10,7 @@ protocol ExerciseAddedDelegate: AnyObject{
     func exercisesAdded(_ exerciseSet: ExerciseSet)
 }
 
-class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
+class ExercisesTableViewController: UITableViewController,UISearchBarDelegate, UISearchResultsUpdating
 {
     var newExercise = [ExercisesData]()
     let CELL_EXERCISE = "exerciseCell"
@@ -19,6 +19,24 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
     var currentRequestIndex: Int = 0
     let MAX_ITEMS_PER_REQUEST = 40
     var exerciseSets: [ExerciseSet] = []
+    var filteredExerciseData :[ExercisesData] = []
+    
+    let muscleGroups: [String] = ["abdominals",
+                                  "abductors",
+                                  "adductors",
+                                  "biceps",
+                                  "calves",
+                                  "chest",
+                                  "forearms",
+                                  "glutes",
+                                  "hamstrings",
+                                  "lats",
+                                  "lower_back",
+                                  "middle_back",
+                                  "neck",
+                                  "quadriceps",
+                                  "traps",
+                                  "triceps"]
     
     weak var delegate: ExerciseAddedDelegate?
     
@@ -27,10 +45,15 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchController = UISearchController(searchResultsController: nil)
+        let muscleController = UIPickerView()
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
+        //let searchTextField = searchController.searchBar.value(forKey: "_searchField") as! UITextField
+        //searchTextField.inputView = muscleController
         searchController.searchBar.showsCancelButton = false
+        searchController.searchBar.scopeButtonTitles = ["All","Arms","Back","Legs","Chest","Abs"]
+        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
         // Ensure the search bar is always visible.
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -52,6 +75,50 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+            searchController.searchBar.setShowsScope(true, animated: true)
+            guard let searchText = searchController.searchBar.text?.lowercased() else {
+            return
+            }
+            
+            filteredExerciseData = newExercise.filter({(exercise: ExercisesData) -> Bool in
+                if searchController.searchBar.selectedScopeButtonIndex == 0{
+                    return true
+                }
+                if searchController.searchBar.selectedScopeButtonIndex == 1{
+                    if exercise.muscle == "biceps" || exercise.muscle == "forearms" || exercise.muscle == "traps" || exercise.muscle == "triceps" || exercise.muscle == "shoulders"{
+                        return true
+                    }
+                }
+                if searchController.searchBar.selectedScopeButtonIndex == 2{
+                    if exercise.muscle == "lower_back" || exercise.muscle == "middle_back" || exercise.muscle == "lats" || exercise.muscle == "neck"{
+                        return true
+                    }
+                }
+                if searchController.searchBar.selectedScopeButtonIndex == 3{
+                    if exercise.muscle == "abductors" || exercise.muscle == "adductors" || exercise.muscle == "calves" || exercise.muscle == "glutes" || exercise.muscle == "hamstrings" || exercise.muscle == "quadriceps"{
+                        return true
+                    }
+                }
+                if searchController.searchBar.selectedScopeButtonIndex == 4{
+                    if exercise.muscle == "chest"{
+                        return true
+                    }
+                }
+                if searchController.searchBar.selectedScopeButtonIndex == 5{
+                    if exercise.muscle == "abdominals"{
+                        return true
+                    }
+                }
+                
+                return false
+        
+            })
+            
+            tableView.reloadData()
+        }
+
 
     // MARK: - Table view data source
 
@@ -62,7 +129,7 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return newExercise.count
+        return filteredExerciseData.count
     }
     
     func requestExercises(_ exercises:String) async {
@@ -82,7 +149,7 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
         }*/
         
         let query = exercises.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let url = URL(string: "https://api.api-ninjas.com/v1/exercises?muscle="+query!)!
+        let url = URL(string: "https://api.api-ninjas.com/v1/exercises?name="+query!)!
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("++z2KwnT+PXKDZLnHzEN9Q==z7IB8lELs2QgxqlE", forHTTPHeaderField: "X-Api-Key")
         do {
@@ -91,10 +158,13 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
             let decoder = JSONDecoder()
             print(String(decoding: data, as: UTF8.self))
             let exerciseData = try decoder.decode([ExercisesData].self, from: data)
+            newExercise = []
             let startIndex = newExercise.count
             for exercise in exerciseData{
                 newExercise.append(exercise)
             }
+            filteredExerciseData = newExercise
+            
             tableView.reloadData()
             /*
             tableView.performBatchUpdates({
@@ -134,7 +204,7 @@ class ExercisesTableViewController: UITableViewController,UISearchBarDelegate
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_EXERCISE, for: indexPath)
         
-        let exercise = newExercise[indexPath.row]
+        let exercise = filteredExerciseData[indexPath.row]
         cell.textLabel?.text = exercise.name
         cell.detailTextLabel?.text = exercise.muscle
 

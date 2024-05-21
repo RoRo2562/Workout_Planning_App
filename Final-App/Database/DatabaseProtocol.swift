@@ -24,6 +24,7 @@ enum ListenerType {
 protocol DatabaseListener: AnyObject{
     var listenerType: ListenerType {get set}
     func onUserChange(change:DatabaseChange,currentUser: User)
+    func onWorkoutsChange(change:DatabaseChange,workouts:[Workout])
 }
 
 protocol AuthenticationListener: AnyObject{
@@ -38,5 +39,6 @@ protocol DatabaseProtocol: AnyObject {
     func removeListener(listener: DatabaseListener)
     func signUp(email:String,password:String, name:String)
     func signIn(email:String,password:String)
+    func addWorkout(newWorkoutName : String , newExerciseSets : [ExerciseSet]) -> Workout
 }
 

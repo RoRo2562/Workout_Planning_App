@@ -9,6 +9,10 @@ import UIKit
 import Firebase
 
 class HomeViewController: UIViewController, DatabaseListener {
+    func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
+        
+    }
+    
     var currentUser = User()
     func onUserChange(change: DatabaseChange, currentUser: User) {
         self.currentUser = currentUser

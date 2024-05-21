@@ -9,7 +9,6 @@ import UIKit
 import FirebaseFirestoreSwift
 
 class ExerciseSet: NSObject,Codable {
-    @DocumentID var id: String?
     var exerciseName: String?
     var exerciseTarget: String?
     var exerciseDifficulty: String?
@@ -17,4 +16,5 @@ class ExerciseSet: NSObject,Codable {
     var exerciseInstructions: String?
     var setWeight: [Int]?
     var setReps: [Int]?
+    
 }

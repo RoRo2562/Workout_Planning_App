@@ -11,7 +11,7 @@ class NutritionViewController: UIViewController,FoodAddedDelegate {
     func foodAdded(_ foodItem: FoodData, _ mealSection: Int) {
         meals[mealSection].append(foodItem)
         caloriesConsumed += foodItem.calories
-        caloriesLabel.text = "calories consumed: " + String(caloriesConsumed) + "calories"
+        caloriesLabel.text = "calories consumed: " + String(caloriesConsumed) + " calories"
         mealsTableView.reloadData()
     }
     
@@ -26,6 +26,11 @@ class NutritionViewController: UIViewController,FoodAddedDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var todaysDate = NSDate()
+        var dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        var DateInFormat = dateFormatter.string(from: todaysDate as Date)
+        navigationItem.title = DateInFormat
         mealsTableView.delegate = self
         mealsTableView.dataSource = self
         mealsTableView.reloadData()

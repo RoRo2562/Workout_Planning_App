@@ -20,6 +20,6 @@ class User: NSObject,Codable {
     var userId : String?
     var email: String?
     var name: String?
-    var workouts: [Workout]?
+    var workouts: [Workout] = []
    // var workout: Workout?
 }

@@ -37,6 +37,9 @@ class FirebaseController: NSObject, DatabaseProtocol {
         if listener.listenerType == .user || listener.listenerType == .all {
             listener.onUserChange(change: .update, currentUser: userData)
         }
+        if listener.listenerType == .workouts || listener.listenerType == .all{
+            listener.onWorkoutsChange(change: .update, workouts: userData.workouts ?? [])
+        }
     }
     func removeListener(listener: DatabaseListener){
         listeners.removeDelegate(listener)
@@ -68,11 +71,12 @@ class FirebaseController: NSObject, DatabaseProtocol {
         let user = Auth.auth().currentUser
         if let userId = user?.uid {
             usersRef = database.collection("users")
+            newWorkout.userId = userId
     
             do {
                 if let workoutsRef = try workoutsRef?.addDocument(from: newWorkout){
                     newWorkout.id = workoutsRef.documentID
-                    usersRef?.document(userId).updateData(["workouts" : FieldValue.arrayUnion([newWorkout])])
+                    usersRef?.document(userId).updateData(["workouts" : FieldValue.arrayUnion([newWorkout.id])])
                 }
             } catch {
                 print("Failed to serialize workout")
@@ -112,6 +116,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
                     self.authenticationListener?.signUpSuccess()
                 }
                 self.setupUserListener()
+                //self.setupWorkoutListener()
                 
                 /*if let userRef = try await usersRef?.addDocument(data: ["team" : addTeam(teamName: authResult.user.uid)]){
                     user.id = userRef.documentID
@@ -133,6 +138,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 let authResult = try await authController.signIn(withEmail: email, password: password)
                 self.currentUser = authResult.user
                 self.setupUserListener()
+                //self.setupWorkoutListener()
                 DispatchQueue.main.async{
                     self.authenticationListener?.signInSuccess()
                 }
@@ -146,13 +152,36 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
-    func getWorkoutByID(_ id:String) -> Workout?{
-        for workout in workoutList{
-            if workout.id == id{
-                return workout
-            }
+    func getWorkoutByID(_ id:String) async -> Workout?{
+        workoutsRef = database.collection("workouts")
+        do{
+            let workoutItem = try await workoutsRef?.document(id).getDocument()
+            currentWorkout = Workout()
+            let decoder = JSONDecoder()
+            //let data = workoutItem?.data()?["exerciseSets"] as! Array<ExerciseSetData>
+            /*
+            let data = try decoder.decode([ExerciseSetData].self, from: workoutItem?.data()?["exerciseSets"] as! Data)
+    
+            for exercise in data{
+                let currentExerciseSet = ExerciseSet()
+                currentExerciseSet.exerciseName = exercise.exerciseName
+                currentExerciseSet.exerciseTarget = exercise.exerciseTarget
+                currentExerciseSet.exerciseEquipment = exercise.exerciseEquipment
+                currentExerciseSet.exerciseDifficulty = exercise.exerciseDifficulty
+                currentExerciseSet.exerciseInstructions = exercise.exerciseInstructions
+                currentExerciseSet.setReps = exercise.setReps
+                currentExerciseSet.setWeight = exercise.setWeight
+                currentWorkout?.exerciseSets.append(currentExerciseSet)
+            }*/
+            
+            //currentWorkout?.exerciseSets = workoutItem?.data()?["exerciseSets"] as! [ExerciseSet]
+            currentWorkout?.userId = workoutItem?.data()?["userId"] as? String
+            currentWorkout?.workoutName = workoutItem?.data()?["workoutName"] as? String
+            return currentWorkout
+        } catch{
+            return nil
         }
-        return nil
+        
     }
     
     func setupUserListener(){
@@ -167,7 +196,31 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 return
             }
             self.parseUsersSnapshot(snapshot: userSnapshot)
+            Task{
+                
+                await self.parseWorkoutSnapshot(snapshot: userSnapshot)
+
+            }
+                }
+    }
+    
+    func setupWorkoutListener(){
+        workoutsRef = database.collection("workouts")
+        guard let userId = currentUser?.uid else{
+            return
         }
+        workoutsRef?.whereField("userId", isEqualTo: userId).addSnapshotListener(){
+            (querySnapshot, error) in
+            guard let querySnapshot = querySnapshot?.documents.first else {
+                print("Failed to fetch documents with error: \(String(describing: error))")
+                return
+            }
+            Task{
+                await self.parseWorkoutSnapshot(snapshot: querySnapshot)
+            }
+            
+        }
+        
     }
     
     func parseUsersSnapshot(snapshot: QueryDocumentSnapshot){
@@ -185,23 +238,39 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
         
     }
-    /*
-    func parseWorkoutSnapshot(snapshot: QueryDocumentSnapshot){
+    
+    func parseWorkoutSnapshot(snapshot: QueryDocumentSnapshot) async{
         guard let loggedUser = currentUser else{
             return
         }
         userData = User()
-        userData.email = snapshot.data()["email"] as? String
         userData.name = snapshot.data()["name"] as? String
         userData.userId = snapshot.data()["userId"] as? String
+        userData.email = snapshot.data()["email"] as? String
         userData.id = snapshot.documentID
-        if let workoutReferences = snapshot.data()["workouts"] as? [DocumentReference] {
+        if let workoutReferences = snapshot.data()["workouts"] as? [String] {
             for reference in workoutReferences {
-                if let workout = getWorkoutByID(reference.documentID){
-                    userData.workouts.append(workout)
+                if let workoutItem = await getWorkoutByID(reference){
+                    userData.workouts.append(workoutItem)
                 }
             }
         }
+        listeners.invoke { (listener) in
+            if listener.listenerType == ListenerType.user || listener.listenerType == ListenerType.all {
+                listener.onWorkoutsChange(change: .update, workouts: userData.workouts ?? [])
+            }
+        }
         
-    }*/
+    }
+    
+    func signOut(){
+        do{
+            let authResult: () = try authController.signOut()
+        }
+        catch{
+            print("Couldn't Sign out")
+        }
+
+        
+    }
 }

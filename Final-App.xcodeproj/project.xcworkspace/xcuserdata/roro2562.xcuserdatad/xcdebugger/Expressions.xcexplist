@@ -3,22 +3,49 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "AddWorkoutViewController.unwind(_:):AddWorkoutViewController.swift">
+         contextName = "closure #1 in ExercisesTableViewController.updateSearchResults(for:):ExercisesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "searchController.searchBar.selectedScopeButtonIndex">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in FirebaseController.signIn(email:password:):FirebaseController.swift">
       </ContextState>
       <ContextState
-         contextName = "main:AppDelegate.swift">
+         contextName = "HomeViewController.viewDidLoad():HomeViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "AddWorkoutViewController.tableView(_:cellForRowAt:):AddWorkoutViewController.swift">
+         contextName = "ExerciseSetTableViewCell.configure(with:):ExerciseSetTableViewCell.swift">
       </ContextState>
       <ContextState
-         contextName = "NutritionViewController.tableView(_:cellForRowAt:):NutritionViewController.swift">
+         contextName = "FirebaseController.getWorkoutByID(_:):FirebaseController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "meals[indexPath.section]">
+               value = "exerciseSet ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WorkoutViewController.tableView(_:numberOfRowsInSection:):WorkoutViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentWorkout?.exerciseSets">
+            </PersistentString>
+            <PersistentString
+               value = "self.exerciseSets">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WorkoutsViewController.viewDidLoad():WorkoutsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseController.setupUserListener():FirebaseController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "usersRef">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -34,21 +61,63 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeViewController.viewDidLoad():HomeViewController.swift">
+         contextName = "FirebaseController.addWorkout(newWorkoutName:newExerciseSets:):FirebaseController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NutritionViewController.tableView(_:cellForRowAt:):NutritionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "meals[indexPath.section]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AddWorkoutViewController.unwind(_:):AddWorkoutViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AddWorkoutViewController.tableView(_:didSelectRowAt:):AddWorkoutViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "main:AppDelegate.swift">
       </ContextState>
       <ContextState
          contextName = "ExercisesTableViewController.tableView(_:didSelectRowAt:):ExercisesTableViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "FirebaseController.setupUserListener():FirebaseController.swift">
+         contextName = "WorkoutViewController.viewDidLoad():WorkoutViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "usersRef">
+               value = "currentWorkout.exerciseSets[0].setReps">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "AddWorkoutViewController.tableView(_:didSelectRowAt:):AddWorkoutViewController.swift">
+         contextName = "FirebaseController.parseWorkoutSnapshot(snapshot:):FirebaseController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "snapshot.data()[&quot;workouts&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WorkoutsViewController.tableView(_:cellForRowAt:):WorkoutsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.myworkouts[0].exerciseSets[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WorkoutsViewController.onUserChange(change:currentUser:):WorkoutsViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "WorkoutViewController.numberOfSections(in:):WorkoutViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AddWorkoutViewController.tableView(_:cellForRowAt:):AddWorkoutViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "AddWorkoutViewController.addWorkoutToUser(_:):AddWorkoutViewController.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
