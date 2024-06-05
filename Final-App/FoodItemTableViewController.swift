@@ -129,7 +129,7 @@ class FoodItemTableViewController: UITableViewController {
         }
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "datacell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
         cell.textLabel?.text = String(currentFood?.sugar_g ?? 0) + " g"
 
         return cell

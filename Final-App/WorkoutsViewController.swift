@@ -13,6 +13,9 @@ class WorkoutsViewController: UIViewController,DatabaseListener {
     }
     
     func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
+        if let currentName = currentUser.name{
+            navigationItem.title = currentName + "'s workouts"
+        }
         myworkouts = workouts
         DispatchQueue.main.async {
             self.workoutsTableView.reloadData()
@@ -33,6 +36,9 @@ class WorkoutsViewController: UIViewController,DatabaseListener {
         databaseController = appDelegate?.databaseController
         workoutsTableView.delegate = self
         workoutsTableView.dataSource = self
+        if let currentName = currentUser.name{
+            navigationItem.title = currentName + "'s workouts"
+        }
         workoutsTableView.reloadData()
 
         // Do any additional setup after loading the view.

@@ -12,6 +12,7 @@ protocol FoodAddedDelegate: AnyObject{
 }
 
 class FoodTableViewController: UITableViewController,UISearchBarDelegate {
+    var foodDetail: FoodData?
     var newFood = [FoodData]()
     var mealAddedTo: Int = 0
     let CELL_FOOD = "foodCell"
@@ -144,6 +145,23 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
         
         
     }
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        foodDetail = newFood[indexPath.row]
+        performSegue(withIdentifier: "viewFoodSegue", sender: Any?.self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewFoodSegue"{
+            let destination = segue.destination as! FoodItemTableViewController
+            destination.currentFood = foodDetail
+
+        }
+        
+    }
+    
+    
     
 
     /*
