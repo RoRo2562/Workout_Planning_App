@@ -8,6 +8,10 @@
 import UIKit
 
 class AddWorkoutViewController: UIViewController,DatabaseListener, ExerciseAddedDelegate {
+    func onMealsChange(change: DatabaseChange, todaysMeal: [Meals]) {
+        
+    }
+    
 
     
     func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
@@ -138,10 +142,10 @@ extension AddWorkoutViewController : UITableViewDataSource {
             let setCell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.indentifier, for: indexPath) as! ExerciseSetTableViewCell
             setCell.configure(with: indexPath.row-1, delegate: self)
             setCell.delegate = self
-            var section = indexPath.section + 1
-            var row = indexPath.row + 1
-            var kg = 1
-            var reps = 2
+            let section = indexPath.section + 1
+            let row = indexPath.row + 1
+            let kg = 1
+            let reps = 2
             setCell.repsTextField.tag = Int("\(reps)0\(section)0\(row)")!
             setCell.repsTextField.delegate = self
             setCell.kgTextField.tag = Int("\(kg)0\(section)0\(row)")!

@@ -9,6 +9,10 @@ import UIKit
 import Firebase
 
 class HomeViewController: UIViewController, DatabaseListener {
+    func onMealsChange(change: DatabaseChange, todaysMeal: [Meals]) {
+        
+    }
+    
     
     var listenerType: ListenerType = .user // We want to listen for changes in user logged in
     weak var databaseController: DatabaseProtocol? // This is the database protocol we need to conform to

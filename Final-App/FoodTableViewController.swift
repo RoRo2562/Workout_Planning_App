@@ -8,7 +8,7 @@
 import UIKit
 
 protocol FoodAddedDelegate: AnyObject{
-    func foodAdded(_ foodItem: FoodData, _ mealSection: Int)
+    func foodAdded(_ foodItem: FoodSet, _ mealSection: Int)
 }
 
 class FoodTableViewController: UITableViewController,UISearchBarDelegate {
@@ -125,7 +125,20 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let foodItem = newFood[indexPath.row]
-        delegate?.foodAdded(foodItem, mealAddedTo)
+        let foodSet = FoodSet()
+        foodSet.name = foodItem.name
+        foodSet.calories = foodItem.calories
+        foodSet.serving_size_g = foodItem.serving_size_g
+        foodSet.fat_total_g = foodItem.fat_total_g
+        foodSet.fat_saturated_g = foodItem.fat_saturated_g
+        foodSet.protein_g = foodItem.protein_g
+        foodSet.sodium_mg = foodItem.sodium_mg
+        foodSet.potassium_mg = foodItem.potassium_mg
+        foodSet.cholesterol_mg = foodItem.cholesterol_mg
+        foodSet.carbohydrates_total_g = foodItem.carbohydrates_total_g
+        foodSet.fiber_g = foodItem.fiber_g
+        foodSet.sugar_g = foodItem.sugar_g
+        delegate?.foodAdded(foodSet, mealAddedTo)
         //performSegue(withIdentifier: "returnExerciseSetsSegue", sender: self)
         navigationController?.popViewController(animated: true)
         

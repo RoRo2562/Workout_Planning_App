@@ -18,6 +18,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var database: Firestore
     var usersRef: CollectionReference?
     var workoutsRef: CollectionReference?
+    var mealsRef: CollectionReference?
     var currentUser: FirebaseAuth.User?
     var currentWorkout: Workout?
     var userData = User()
@@ -38,7 +39,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
             listener.onUserChange(change: .update, currentUser: userData)
         }
         if listener.listenerType == .workouts || listener.listenerType == .all{
-            listener.onWorkoutsChange(change: .update, workouts: userData.workouts ?? [])
+            listener.onWorkoutsChange(change: .update, workouts: userData.workouts)
         }
     }
     func removeListener(listener: DatabaseListener){
@@ -83,6 +84,34 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
         }
         return newWorkout
+    }
+    
+    func addMealToday() -> Meals{
+        let newMeal = Meals()
+        mealsRef = database.collection("meals")
+        
+        let todaysDate = NSDate()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy"
+        let dateInFormat = dateFormatter.string(from: todaysDate as Date)
+        
+        let user = Auth.auth().currentUser
+        
+        if let userId = user?.uid {
+            usersRef = database.collection("users")
+            newMeal.userId = userId
+            newMeal.mealDate = dateInFormat
+            
+            do {
+                if let mealsRef = try mealsRef?.addDocument(from: newMeal){
+                    newMeal.id = mealsRef.documentID
+                    usersRef?.document(userId).updateData(["meals" : FieldValue.arrayUnion([newMeal.id])])
+                }
+            } catch {
+                print("Failed to serialize meal")
+            }
+        }
+        return newMeal
     }
     
     func addExerciseToWorkout(exercise: ExercisesData) {
@@ -158,33 +187,36 @@ class FirebaseController: NSObject, DatabaseProtocol {
         do{
             let workoutItem = try await workoutsRef?.document(id).getDocument()
             currentWorkout = Workout()
-            let decoder = JSONDecoder()
             let workout = try workoutItem?.data(as:Workout.self)
             currentWorkout = workout
-            //let data = workoutItem?.data()?["exerciseSets"] as! Array<ExerciseSetData>
-            /*
-            let data = try decoder.decode([ExerciseSetData].self, from: workoutItem?.data()?["exerciseSets"] as! Data)
-    
-            for exercise in data{
-                let currentExerciseSet = ExerciseSet()
-                currentExerciseSet.exerciseName = exercise.exerciseName
-                currentExerciseSet.exerciseTarget = exercise.exerciseTarget
-                currentExerciseSet.exerciseEquipment = exercise.exerciseEquipment
-                currentExerciseSet.exerciseDifficulty = exercise.exerciseDifficulty
-                currentExerciseSet.exerciseInstructions = exercise.exerciseInstructions
-                currentExerciseSet.setReps = exercise.setReps
-                currentExerciseSet.setWeight = exercise.setWeight
-                currentWorkout?.exerciseSets.append(currentExerciseSet)
-            }*/
-            
-            //currentWorkout?.exerciseSets = workoutItem?.data()?["exerciseSets"] as! [ExerciseSet]
-            //currentWorkout?.userId = workoutItem?.data()?["userId"] as? String
-            //currentWorkout?.workoutName = workoutItem?.data()?["workoutName"] as? String
             return currentWorkout
         } catch{
             return nil
         }
         
+    }
+    
+    func getMealByID(_ id:String) async -> Meals?{
+        mealsRef = database.collection("workouts")
+        do{
+            let mealItem = try await mealsRef?.document(id).getDocument()
+            var currentMeal = Meals()
+            guard let meal = try mealItem?.data(as:Meals.self) else{
+                return nil
+            }
+            // This section gets todays date to see if the meal we have found in the list of meals is todays meals
+            let todaysDate = NSDate()
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM-yyyy"
+            let dateInFormat = dateFormatter.string(from: todaysDate as Date)
+            
+            // We compare the date of the meals in the list of meals to todays date, if its not today then we don't want to display the data
+            currentMeal = meal
+            return currentMeal
+            
+        } catch{
+            return nil
+        }
     }
     
     func setupUserListener(){
@@ -258,10 +290,27 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 }
             }
         }
+        if let mealReferences = snapshot.data()["meals"] as? [String] {
+            for reference in mealReferences {
+                if let mealItem = await getMealByID(reference){
+                    userData.meals.append(mealItem)
+                }
+            }
+            // We want to check if the user has not logged in today which would result in no meal being stored for today
+        }
+        
         listeners.invoke { (listener) in
             if listener.listenerType == ListenerType.user || listener.listenerType == ListenerType.all {
-                listener.onWorkoutsChange(change: .update, workouts: userData.workouts ?? [])
+                listener.onWorkoutsChange(change: .update, workouts: userData.workouts)
+                listener.onMealsChange(change: .update, todaysMeal: userData.meals)
             }
+        }
+        
+    }
+    
+    func parseMealsSnapshot(snapshot: QueryDocumentSnapshot) async{
+        guard let loggedUser = currentUser else{
+            return
         }
         
     }

@@ -8,7 +8,7 @@
 import UIKit
 
 class FoodItemTableViewController: UITableViewController {
-
+    var currentFood: FoodData?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,23 +23,118 @@ class FoodItemTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 12
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return "Name"
+        }
+        if section == 1{
+            return "Calories"
+        }
+        if section == 2{
+            return "Serving Size"
+        }
+        if section == 3{
+            return "Total Fat"
+        }
+        if section == 4{
+            return "Saturated Fat"
+        }
+        if section == 5{
+            return "Protein"
+        }
+        if section == 6{
+            return "Sodium"
+        }
+        if section == 7{
+            return "Potassium"
+        }
+        if section == 8{
+            return "Cholesterol"
+        }
+        if section == 9{
+            return "Total Carbohydrates"
+        }
+        if section == 10{
+            return "Fiber"
+        }
+        if section == 11{
+            return "Sugar"
+        }
+        return ""
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
+        if indexPath.section == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = currentFood?.name
+            return cell
+        }
+        if indexPath.section == 1{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.calories ?? 0)
+            return cell
+        }
+        if indexPath.section == 2{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.serving_size_g ?? 0) + " g"
+            return cell
+        }
+        if indexPath.section == 3{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.fat_total_g ?? 0) + " g"
+            return cell
+        }
+        if indexPath.section == 4{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.fat_saturated_g ?? 0) + " g"
+            return cell
+        }
+        if indexPath.section == 5{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.protein_g ?? 0) + " g"
+            return cell
+        }
+        if indexPath.section == 6{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.sodium_mg ?? 0) + " mg"
+            return cell
+        }
+        if indexPath.section == 7{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.potassium_mg ?? 0) + " mg"
+            return cell
+        }
+        if indexPath.section == 8{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.cholesterol_mg ?? 0) + " mg"
+            return cell
+        }
+        if indexPath.section == 9{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.carbohydrates_total_g ?? 0) + " g"
+            return cell
+        }
+        if indexPath.section == 10{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.fiber_g ?? 0) + " g"
+            return cell
+        }
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "datacell", for: indexPath)
+        cell.textLabel?.text = String(currentFood?.sugar_g ?? 0) + " g"
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.

@@ -64,7 +64,7 @@ extension WorkoutViewController : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return (currentWorkout?.exerciseSets[0].setReps?.capacity ?? 0) + 3
+        return (currentWorkout?.exerciseSets[0].setReps?.count ?? 0) + 3
         
     }
     
@@ -81,8 +81,10 @@ extension WorkoutViewController : UITableViewDataSource {
         if indexPath.row > 1{
             let setCell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.indentifier, for: indexPath) as! ExerciseSetTableViewCell
             setCell.configure(with: indexPath.row-1, delegate: self)
-            let currentExercise = currentWorkout?.exerciseSets[indexPath.section].setReps?[indexPath.row - 2]
-            setCell.kgTextField.text = "2"
+            print(indexPath.row)
+            //let currentExercise = currentWorkout?.exerciseSets[indexPath.section].setReps?[indexPath.row - 2]
+            setCell.repsTextField.text = String(currentWorkout?.exerciseSets[indexPath.section].setReps?[indexPath.row - 2] ?? 0)
+            setCell.kgTextField.text = String(currentWorkout?.exerciseSets[indexPath.section].setWeight?[indexPath.row - 2] ?? 0)
             return setCell
         }
         

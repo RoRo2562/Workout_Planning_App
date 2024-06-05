@@ -13,6 +13,7 @@ enum CodingKeys: String, Codable{
     case email
     case userId
     case workouts
+    case meals
 
 }
 class User: NSObject,Codable {
@@ -21,5 +22,6 @@ class User: NSObject,Codable {
     var email: String?
     var name: String?
     var workouts: [Workout] = []
+    var meals: [Meals] = []
    // var workout: Workout?
 }

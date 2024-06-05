@@ -7,6 +7,11 @@
 
 import UIKit
 
-class Meals: NSObject {
-
+class Meals: NSObject,Codable {
+    var id: String?
+    var mealDate: String?
+    var userId: String?
+    var breakfast: [FoodSet] = []
+    var lunch: [FoodSet] = []
+    var dinner: [FoodSet] = []
 }

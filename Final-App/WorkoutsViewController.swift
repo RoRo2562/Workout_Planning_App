@@ -8,6 +8,10 @@
 import UIKit
 
 class WorkoutsViewController: UIViewController,DatabaseListener {
+    func onMealsChange(change: DatabaseChange, todaysMeal: [Meals]) {
+        
+    }
+    
     func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
         myworkouts = workouts
         DispatchQueue.main.async {
