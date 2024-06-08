@@ -10,26 +10,19 @@ import UIKit
 class NutritionViewController: UIViewController,FoodAddedDelegate,DatabaseListener {
     var listenerType: ListenerType = .all
     var currentUser = User()
-    var mealsToday: Meals?
+    var currentMeal: Meals?
     weak var databaseController: DatabaseProtocol?
+    weak var firebaseController: FirebaseController?
+    @IBOutlet weak var caloriesLabel: UILabel!
+    
+    @IBOutlet weak var mealsTableView: UITableView!
+    var currentMeals : Meals?
+    //var meals: [[FoodData]] = [[],[],[]]
+    var mealAddedTo: Int?
+    var caloriesConsumed: Float = 0
     
     func onUserChange(change: DatabaseChange, currentUser: User) {
         self.currentUser = currentUser
-        let todaysDate = NSDate()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateInFormat = dateFormatter.string(from: todaysDate as Date)
-
-        for meal in currentUser.meals{
-            if meal.mealDate == dateInFormat{
-                self.mealsToday = meal
-            }
-        }
-        
-        if self.mealsToday == nil{
-            self.mealsToday = self.databaseController?.addMealToday()
-        }
-    
         
     }
     
@@ -37,20 +30,8 @@ class NutritionViewController: UIViewController,FoodAddedDelegate,DatabaseListen
         
     }
     
-    func onMealsChange(change: DatabaseChange, todaysMeal: [Meals]) {
-        let todaysDate = NSDate()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateInFormat = dateFormatter.string(from: todaysDate as Date)
+    func onMealsChange(change: DatabaseChange, meals: [Meals]) {
 
-        for meal in currentUser.meals{
-            if meal.mealDate == dateInFormat{
-                self.mealsToday = meal
-            }
-        }
-        if self.mealsToday == nil{
-            self.mealsToday = self.databaseController?.addMealToday()
-        }
         DispatchQueue.main.async {
             self.mealsTableView.reloadData()
         }
@@ -58,40 +39,58 @@ class NutritionViewController: UIViewController,FoodAddedDelegate,DatabaseListen
     
     func foodAdded(_ foodItem: FoodSet, _ mealSection: Int) {
         if mealSection == 0{
-            self.mealsToday?.breakfast.append(foodItem)
+            if let mealToAddTo = self.currentMeal{
+                self.currentMeal?.breakfast.append(foodItem)
+                print(currentMeal?.id)
+                
+                self.databaseController?.addFoodToMeal(mealToAddTo: mealToAddTo, foodItem: foodItem, mealTime: "breakfast")
+            }
         }
         if mealSection == 1{
-            self.mealsToday?.lunch.append(foodItem)
+            if let mealToAddTo = self.currentMeal{
+                self.currentMeal?.lunch.append(foodItem)
+                
+                self.databaseController?.addFoodToMeal(mealToAddTo: mealToAddTo, foodItem: foodItem, mealTime: "lunch")
+            }
         }
         if mealSection == 2{
-            self.mealsToday?.dinner.append(foodItem)
+            if let mealToAddTo = self.currentMeal{
+                self.currentMeal?.dinner.append(foodItem)
+                
+                self.databaseController?.addFoodToMeal(mealToAddTo: mealToAddTo, foodItem: foodItem, mealTime: "dinner")
+            }
         }
         caloriesConsumed += foodItem.calories ?? 0
         caloriesLabel.text = "calories consumed: " + String(caloriesConsumed) + " calories"
         mealsTableView.reloadData()
     }
     
-    
-    
-    @IBOutlet weak var caloriesLabel: UILabel!
-    
-    @IBOutlet weak var mealsTableView: UITableView!
-    var currentMeal : Meals?
-    //var meals: [[FoodData]] = [[],[],[]]
-    var mealAddedTo: Int?
-    var caloriesConsumed: Float = 0
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        databaseController = appDelegate?.databaseController
         let todaysDate = NSDate()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyyy"
         let DateInFormat = dateFormatter.string(from: todaysDate as Date)
-        navigationItem.title = DateInFormat
+        navigationItem.title = currentMeal?.mealDate
         mealsTableView.delegate = self
         mealsTableView.dataSource = self
         mealsTableView.reloadData()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    // Remove the listeners when the view dissappears
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
     }
     
 
@@ -119,13 +118,13 @@ extension NutritionViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0{
-            return (mealsToday?.breakfast.count ?? 0) + 2
+            return (currentMeal?.breakfast.count ?? 0) + 2
         }
         if section == 1{
-            return (mealsToday?.lunch.count ?? 0) + 2
+            return (currentMeal?.lunch.count ?? 0) + 2
         }
         if section == 2{
-            return (mealsToday?.dinner.count ?? 0) + 2
+            return (currentMeal?.dinner.count ?? 0) + 2
         }
         return 1
         
@@ -149,33 +148,33 @@ extension NutritionViewController : UITableViewDataSource {
         
         //var content = foodItemCell.defaultContentConfiguration()
         if indexPath.section == 0{
-            if indexPath.row == (mealsToday?.breakfast.count ?? 0) + 1 {
+            if indexPath.row == (currentMeal?.breakfast.count ?? 0) + 1 {
                 let addMealCell = tableView.dequeueReusableCell(withIdentifier: "addMealCell", for: indexPath)
                 return addMealCell
             }
             let foodItemCell = tableView.dequeueReusableCell(withIdentifier: "foodItemCell", for: indexPath)
-            foodItemCell.textLabel?.text = mealsToday?.breakfast[indexPath.row-1].name
-            foodItemCell.detailTextLabel?.text = String(mealsToday?.breakfast[indexPath.row-1].calories ?? 0) + " calories"
+            foodItemCell.textLabel?.text = currentMeal?.breakfast[indexPath.row-1].name
+            foodItemCell.detailTextLabel?.text = String(currentMeal?.breakfast[indexPath.row-1].calories ?? 0) + " calories"
             return foodItemCell
         }
         if indexPath.section == 1{
-            if indexPath.row == (mealsToday?.lunch.count ?? 0) + 1 {
+            if indexPath.row == (currentMeal?.lunch.count ?? 0) + 1 {
                 let addMealCell = tableView.dequeueReusableCell(withIdentifier: "addMealCell", for: indexPath)
                 return addMealCell
             }
             let foodItemCell = tableView.dequeueReusableCell(withIdentifier: "foodItemCell", for: indexPath)
-            foodItemCell.textLabel?.text = mealsToday?.lunch[indexPath.row-1].name
-            foodItemCell.detailTextLabel?.text = String(mealsToday?.lunch[indexPath.row-1].calories ?? 0) + " calories"
+            foodItemCell.textLabel?.text = currentMeal?.lunch[indexPath.row-1].name
+            foodItemCell.detailTextLabel?.text = String(currentMeal?.lunch[indexPath.row-1].calories ?? 0) + " calories"
             return foodItemCell
         }
         if indexPath.section == 2{
-            if indexPath.row == (mealsToday?.dinner.count ?? 0) + 1 {
+            if indexPath.row == (currentMeal?.dinner.count ?? 0) + 1 {
                 let addMealCell = tableView.dequeueReusableCell(withIdentifier: "addMealCell", for: indexPath)
                 return addMealCell
             }
             let foodItemCell = tableView.dequeueReusableCell(withIdentifier: "foodItemCell", for: indexPath)
-            foodItemCell.textLabel?.text = mealsToday?.dinner[indexPath.row-1].name
-            foodItemCell.detailTextLabel?.text = String(mealsToday?.dinner[indexPath.row-1].calories ?? 0) + " calories"
+            foodItemCell.textLabel?.text = currentMeal?.dinner[indexPath.row-1].name
+            foodItemCell.detailTextLabel?.text = String(currentMeal?.dinner[indexPath.row-1].calories ?? 0) + " calories"
             return foodItemCell
         }
         // This is just to satisfy the return, never gets reached
@@ -191,22 +190,22 @@ extension NutritionViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section != 3{
             if indexPath.section == 0{
-                if indexPath.row == (mealsToday?.breakfast.count ?? 0) + 1{
-                    let currentMeal = mealsToday?.breakfast
+                if indexPath.row == (currentMeal?.breakfast.count ?? 0) + 1{
+                    let currentMeals = currentMeal?.breakfast
                     mealAddedTo = indexPath.section
                     performSegue(withIdentifier: "addFoodSegue", sender: Any?.self)
                 }
             }
             if indexPath.section == 1{
-                if indexPath.row == (mealsToday?.lunch.count ?? 0) + 1{
-                    let currentMeal = mealsToday?.lunch
+                if indexPath.row == (currentMeal?.lunch.count ?? 0) + 1{
+                    let currentMeals = currentMeal?.lunch
                     mealAddedTo = indexPath.section
                     performSegue(withIdentifier: "addFoodSegue", sender: Any?.self)
                 }
             }
             if indexPath.section == 2{
-                if indexPath.row == (mealsToday?.dinner.count ?? 0) + 1{
-                    let currentMeal = mealsToday?.dinner
+                if indexPath.row == (currentMeal?.dinner.count ?? 0) + 1{
+                    let currentMeals = currentMeal?.dinner
                     mealAddedTo = indexPath.section
                     performSegue(withIdentifier: "addFoodSegue", sender: Any?.self)
                 }
@@ -225,6 +224,8 @@ extension NutritionViewController : UITableViewDataSource {
        }
        
    }
+    
+    
     
     
 }

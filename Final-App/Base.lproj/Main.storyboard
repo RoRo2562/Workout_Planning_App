@@ -482,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PvB-J3-eLj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3185.4961832061067" y="733.80281690140851"/>
+            <point key="canvasLocation" x="172" y="2301"/>
         </scene>
         <!--Food Table View Controller-->
         <scene sceneID="WBt-wN-mx0">
@@ -530,7 +530,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJJ-3I-1pk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4081.679389312977" y="733.80281690140851"/>
+            <point key="canvasLocation" x="172" y="3073"/>
         </scene>
         <!--Food-->
         <scene sceneID="waV-Pm-HlX">
@@ -584,7 +584,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mmC-Oi-bLy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5010" y="734"/>
+            <point key="canvasLocation" x="1369" y="3073"/>
         </scene>
         <!--Exercises Table View Controller-->
         <scene sceneID="MiC-0U-fax">
@@ -841,6 +841,27 @@
             </objects>
             <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
         </scene>
+        <!--NutritionCalendar-->
+        <scene sceneID="t94-ch-hEL">
+            <objects>
+                <viewController title="NutritionCalendar" id="ANm-Wf-3Ce" customClass="NutritionHomeViewController" customModule="Final_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DGd-12-gyr">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Fpa-45-Mm9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Nutrition" image="carrot.fill" catalog="system" selectedImage="carrot.fill" id="6fi-ma-Ta1">
+                        <color key="badgeColor" systemColor="systemPinkColor"/>
+                    </tabBarItem>
+                    <connections>
+                        <segue destination="yPx-Ik-R7T" kind="show" identifier="viewDietSegue" id="sIJ-l3-RVS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5eh-wr-qsD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="173" y="1555"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="oGW-JR-Vrf">
             <objects>
@@ -857,7 +878,7 @@
                     <connections>
                         <segue destination="kSa-pd-WnX" kind="relationship" relationship="viewControllers" id="sU1-4s-j00"/>
                         <segue destination="DgM-Zj-hLE" kind="relationship" relationship="viewControllers" id="35R-Tk-B4I"/>
-                        <segue destination="yPx-Ik-R7T" kind="relationship" relationship="viewControllers" id="nKy-Am-T52"/>
+                        <segue destination="ANm-Wf-3Ce" kind="relationship" relationship="viewControllers" id="F0a-SM-VRm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hee-Fh-hrB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -867,7 +888,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="lgP-fe-kZn"/>
-        <segue reference="Ysn-Td-Jln"/>
+        <segue reference="DeE-z3-gKm"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="carrot.fill" catalog="system" width="128" height="122"/>

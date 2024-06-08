@@ -8,7 +8,7 @@
 import UIKit
 
 class AddWorkoutViewController: UIViewController,DatabaseListener, ExerciseAddedDelegate {
-    func onMealsChange(change: DatabaseChange, todaysMeal: [Meals]) {
+    func onMealsChange(change: DatabaseChange, meals: [Meals]) {
         
     }
     

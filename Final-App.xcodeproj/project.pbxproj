@@ -24,6 +24,14 @@
 		405E5A2A2C102D8F0070C7F3 /* Meals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A292C102D8F0070C7F3 /* Meals.swift */; };
 		405E5A2C2C102F0A0070C7F3 /* FoodSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A2B2C102F0A0070C7F3 /* FoodSet.swift */; };
 		405E5A2E2C1050B70070C7F3 /* FoodItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A2D2C1050B70070C7F3 /* FoodItemTableViewController.swift */; };
+		405E5A312C11B8040070C7F3 /* NutritionHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A302C11B8040070C7F3 /* NutritionHomeViewController.swift */; };
+		405E5A372C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A352C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodeld */; };
+		405E5A3B2C12F4DF0070C7F3 /* Food+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A392C12F4DF0070C7F3 /* Food+CoreDataClass.swift */; };
+		405E5A3C2C12F4DF0070C7F3 /* Food+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A3A2C12F4DF0070C7F3 /* Food+CoreDataProperties.swift */; };
+		405E5A3E2C12F5730070C7F3 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A3D2C12F5730070C7F3 /* CoreDataController.swift */; };
+		405E5A402C12F8E00070C7F3 /* CoreDatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A3F2C12F8E00070C7F3 /* CoreDatabaseProtocol.swift */; };
+		405E5A432C1317160070C7F3 /* HorizonCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 405E5A422C1317160070C7F3 /* HorizonCalendar */; };
+		405E5A452C1436AC0070C7F3 /* FoodPieChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405E5A442C1436AC0070C7F3 /* FoodPieChartViewController.swift */; };
 		40BD84AC2BF9B204002D9E51 /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BD84AB2BF9B204002D9E51 /* WorkoutViewController.swift */; };
 		40BD84AE2BFC50C8002D9E51 /* ExerciseSetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BD84AD2BFC50C8002D9E51 /* ExerciseSetData.swift */; };
 		40BD84B02BFC761B002D9E51 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BD84AF2BFC761B002D9E51 /* HealthKitManager.swift */; };
@@ -90,6 +98,14 @@
 		405E5A292C102D8F0070C7F3 /* Meals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meals.swift; sourceTree = "<group>"; };
 		405E5A2B2C102F0A0070C7F3 /* FoodSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSet.swift; sourceTree = "<group>"; };
 		405E5A2D2C1050B70070C7F3 /* FoodItemTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemTableViewController.swift; sourceTree = "<group>"; };
+		405E5A2F2C118E0C0070C7F3 /* Final-App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Final-App.entitlements"; sourceTree = "<group>"; };
+		405E5A302C11B8040070C7F3 /* NutritionHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutritionHomeViewController.swift; sourceTree = "<group>"; };
+		405E5A362C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "FinalApp-DataModel.xcdatamodel"; sourceTree = "<group>"; };
+		405E5A392C12F4DF0070C7F3 /* Food+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataClass.swift"; sourceTree = "<group>"; };
+		405E5A3A2C12F4DF0070C7F3 /* Food+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Food+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		405E5A3D2C12F5730070C7F3 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		405E5A3F2C12F8E00070C7F3 /* CoreDatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDatabaseProtocol.swift; sourceTree = "<group>"; };
+		405E5A442C1436AC0070C7F3 /* FoodPieChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodPieChartViewController.swift; sourceTree = "<group>"; };
 		40BD84AB2BF9B204002D9E51 /* WorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		40BD84AD2BFC50C8002D9E51 /* ExerciseSetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseSetData.swift; sourceTree = "<group>"; };
 		40BD84AF2BFC761B002D9E51 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
@@ -125,6 +141,7 @@
 				40C802342BD76EE900685252 /* FirebaseAnalyticsSwift in Frameworks */,
 				40C802302BD76EE900685252 /* FirebaseAnalytics in Frameworks */,
 				40C802322BD76EE900685252 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				405E5A432C1317160070C7F3 /* HorizonCalendar in Frameworks */,
 				40C802582BD76EE900685252 /* FirebaseMLModelDownloader in Frameworks */,
 				40C8024C2BD76EE900685252 /* FirebaseFirestoreSwift in Frameworks */,
 				40C802382BD76EE900685252 /* FirebaseAppCheck in Frameworks */,
@@ -152,9 +169,52 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		405E5A322C12EAFA0070C7F3 /* CustomCells */ = {
+			isa = PBXGroup;
+			children = (
+				401F29532BE781240066FC1C /* ExerciseSetTableViewCell.swift */,
+				401F29542BE781240066FC1C /* ExerciseSetTableViewCell.xib */,
+				401F29592BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift */,
+				401F295A2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib */,
+				40BD84B32BFC7CD4002D9E51 /* ExerciseTableViewCell.swift */,
+			);
+			path = CustomCells;
+			sourceTree = "<group>";
+		};
+		405E5A332C12EB310070C7F3 /* Codables */ = {
+			isa = PBXGroup;
+			children = (
+				40C802652BD7716F00685252 /* User.swift */,
+				401F29632BEA12590066FC1C /* Workout.swift */,
+				405E5A292C102D8F0070C7F3 /* Meals.swift */,
+			);
+			path = Codables;
+			sourceTree = "<group>";
+		};
+		405E5A342C12EC050070C7F3 /* Workouts */ = {
+			isa = PBXGroup;
+			children = (
+				401F29672BF34A490066FC1C /* WorkoutsViewController.swift */,
+				40BD84AB2BF9B204002D9E51 /* WorkoutViewController.swift */,
+				401F294F2BE773620066FC1C /* AddWorkoutViewController.swift */,
+				40007BD52BE08FAE00F90F8B /* ExercisesTableViewController.swift */,
+			);
+			path = Workouts;
+			sourceTree = "<group>";
+		};
+		405E5A382C12EEA80070C7F3 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				405E5A352C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
 		40C802052BD760C200685252 = {
 			isa = PBXGroup;
 			children = (
+				405E5A392C12F4DF0070C7F3 /* Food+CoreDataClass.swift */,
+				405E5A3A2C12F4DF0070C7F3 /* Food+CoreDataProperties.swift */,
 				40C802102BD760C200685252 /* Final-App */,
 				40C8020F2BD760C200685252 /* Products */,
 			);
@@ -171,6 +231,11 @@
 		40C802102BD760C200685252 /* Final-App */ = {
 			isa = PBXGroup;
 			children = (
+				405E5A382C12EEA80070C7F3 /* DataModel */,
+				405E5A342C12EC050070C7F3 /* Workouts */,
+				405E5A332C12EB310070C7F3 /* Codables */,
+				405E5A2F2C118E0C0070C7F3 /* Final-App.entitlements */,
+				405E5A322C12EAFA0070C7F3 /* CustomCells */,
 				40C802272BD768C900685252 /* Database */,
 				40C802252BD7631100685252 /* SignInViewController.swift */,
 				40C8026B2BD7A49800685252 /* SignUpViewController.swift */,
@@ -182,31 +247,21 @@
 				40C8021C2BD760C500685252 /* LaunchScreen.storyboard */,
 				40C8021F2BD760C500685252 /* Info.plist */,
 				40C8022D2BD76E5A00685252 /* FirebaseController.swift */,
-				40C802652BD7716F00685252 /* User.swift */,
-				401F29632BEA12590066FC1C /* Workout.swift */,
-				405E5A292C102D8F0070C7F3 /* Meals.swift */,
 				405E5A2B2C102F0A0070C7F3 /* FoodSet.swift */,
 				401F29612BEA11B40066FC1C /* ExerciseSet.swift */,
 				40BD84AD2BFC50C8002D9E51 /* ExerciseSetData.swift */,
 				40C802692BD7A1A900685252 /* DisplayMessage.swift */,
 				40C8026D2BD7A7BF00685252 /* GoogleService-Info.plist */,
 				40C8026F2BD7ADA100685252 /* HomeViewController.swift */,
-				401F29672BF34A490066FC1C /* WorkoutsViewController.swift */,
-				40BD84AB2BF9B204002D9E51 /* WorkoutViewController.swift */,
-				401F294F2BE773620066FC1C /* AddWorkoutViewController.swift */,
+				405E5A302C11B8040070C7F3 /* NutritionHomeViewController.swift */,
 				401F29652BF31E3E0066FC1C /* NutritionViewController.swift */,
 				401F294D2BE763360066FC1C /* FoodTableViewController.swift */,
-				40007BD52BE08FAE00F90F8B /* ExercisesTableViewController.swift */,
 				40007BD92BE0B53D00F90F8B /* FoodData.swift */,
 				40007BD72BE0914A00F90F8B /* ExercisesData.swift */,
-				401F29532BE781240066FC1C /* ExerciseSetTableViewCell.swift */,
-				401F29542BE781240066FC1C /* ExerciseSetTableViewCell.xib */,
-				401F29592BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift */,
-				401F295A2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.xib */,
 				40BD84AF2BFC761B002D9E51 /* HealthKitManager.swift */,
 				40BD84B12BFC7928002D9E51 /* ExerciseTableViewController.swift */,
 				405E5A2D2C1050B70070C7F3 /* FoodItemTableViewController.swift */,
-				40BD84B32BFC7CD4002D9E51 /* ExerciseTableViewCell.swift */,
+				405E5A442C1436AC0070C7F3 /* FoodPieChartViewController.swift */,
 			);
 			path = "Final-App";
 			sourceTree = "<group>";
@@ -216,6 +271,8 @@
 			children = (
 				40C802282BD768E600685252 /* DatabaseProtocol.swift */,
 				40C802672BD7730B00685252 /* MulticastDelegate.swift */,
+				405E5A3D2C12F5730070C7F3 /* CoreDataController.swift */,
+				405E5A3F2C12F8E00070C7F3 /* CoreDatabaseProtocol.swift */,
 			);
 			path = Database;
 			sourceTree = "<group>";
@@ -264,6 +321,7 @@
 				40C8025F2BD76EE900685252 /* FirebaseRemoteConfigSwift */,
 				40C802612BD76EE900685252 /* FirebaseStorage */,
 				40C802632BD76EE900685252 /* FirebaseStorageCombine-Community */,
+				405E5A422C1317160070C7F3 /* HorizonCalendar */,
 			);
 			productName = "Final-App";
 			productReference = 40C8020E2BD760C200685252 /* Final-App.app */;
@@ -295,6 +353,7 @@
 			mainGroup = 40C802052BD760C200685252;
 			packageReferences = (
 				40C8022C2BD76BFB00685252 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				405E5A412C1317150070C7F3 /* XCRemoteSwiftPackageReference "HorizonCalendar" */,
 			);
 			productRefGroup = 40C8020F2BD760C200685252 /* Products */;
 			projectDirPath = "";
@@ -329,6 +388,7 @@
 			files = (
 				405E5A2C2C102F0A0070C7F3 /* FoodSet.swift in Sources */,
 				401F29662BF31E3E0066FC1C /* NutritionViewController.swift in Sources */,
+				405E5A312C11B8040070C7F3 /* NutritionHomeViewController.swift in Sources */,
 				40C8022E2BD76E5A00685252 /* FirebaseController.swift in Sources */,
 				40C802162BD760C200685252 /* ViewController.swift in Sources */,
 				40C8026A2BD7A1A900685252 /* DisplayMessage.swift in Sources */,
@@ -340,7 +400,10 @@
 				401F294E2BE763360066FC1C /* FoodTableViewController.swift in Sources */,
 				40007BDA2BE0B53D00F90F8B /* FoodData.swift in Sources */,
 				405E5A2E2C1050B70070C7F3 /* FoodItemTableViewController.swift in Sources */,
+				405E5A3B2C12F4DF0070C7F3 /* Food+CoreDataClass.swift in Sources */,
+				405E5A3C2C12F4DF0070C7F3 /* Food+CoreDataProperties.swift in Sources */,
 				401F29552BE781240066FC1C /* ExerciseSetTableViewCell.swift in Sources */,
+				405E5A3E2C12F5730070C7F3 /* CoreDataController.swift in Sources */,
 				405E5A2A2C102D8F0070C7F3 /* Meals.swift in Sources */,
 				40C802682BD7730B00685252 /* MulticastDelegate.swift in Sources */,
 				40C802262BD7631100685252 /* SignInViewController.swift in Sources */,
@@ -348,11 +411,14 @@
 				40BD84B42BFC7CD4002D9E51 /* ExerciseTableViewCell.swift in Sources */,
 				401F295B2BEA0BB20066FC1C /* ExerciseSetTitleTableViewCell.swift in Sources */,
 				401F29682BF34A490066FC1C /* WorkoutsViewController.swift in Sources */,
+				405E5A402C12F8E00070C7F3 /* CoreDatabaseProtocol.swift in Sources */,
 				40BD84B22BFC7928002D9E51 /* ExerciseTableViewController.swift in Sources */,
 				40BD84AC2BF9B204002D9E51 /* WorkoutViewController.swift in Sources */,
 				40BD84B02BFC761B002D9E51 /* HealthKitManager.swift in Sources */,
 				401F29622BEA11B40066FC1C /* ExerciseSet.swift in Sources */,
+				405E5A372C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodeld in Sources */,
 				401F29502BE773620066FC1C /* AddWorkoutViewController.swift in Sources */,
+				405E5A452C1436AC0070C7F3 /* FoodPieChartViewController.swift in Sources */,
 				40C802142BD760C200685252 /* SceneDelegate.swift in Sources */,
 				40C802292BD768E600685252 /* DatabaseProtocol.swift in Sources */,
 				40BD84AE2BFC50C8002D9E51 /* ExerciseSetData.swift in Sources */,
@@ -506,6 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Final-App/Final-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -533,6 +600,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Final-App/Final-App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -579,6 +647,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		405E5A412C1317150070C7F3 /* XCRemoteSwiftPackageReference "HorizonCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/HorizonCalendar";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		40C8022C2BD76BFB00685252 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -590,6 +666,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		405E5A422C1317160070C7F3 /* HorizonCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 405E5A412C1317150070C7F3 /* XCRemoteSwiftPackageReference "HorizonCalendar" */;
+			productName = HorizonCalendar;
+		};
 		40C8022F2BD76EE900685252 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 40C8022C2BD76BFB00685252 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
@@ -726,6 +807,19 @@
 			productName = "FirebaseStorageCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		405E5A352C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				405E5A362C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodel */,
+			);
+			currentVersion = 405E5A362C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodel */;
+			path = "FinalApp-DataModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 40C802062BD760C200685252 /* Project object */;
 }

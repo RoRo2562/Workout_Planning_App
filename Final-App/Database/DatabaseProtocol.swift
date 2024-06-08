@@ -26,8 +26,9 @@ protocol DatabaseListener: AnyObject{
     var listenerType: ListenerType {get set}
     func onUserChange(change:DatabaseChange,currentUser: User)
     func onWorkoutsChange(change:DatabaseChange,workouts:[Workout])
-    func onMealsChange(change:DatabaseChange,todaysMeal:[Meals])
+    func onMealsChange(change:DatabaseChange,meals:[Meals])
 }
+
 
 protocol AuthenticationListener: AnyObject{
     func signUpSuccess()
@@ -42,6 +43,7 @@ protocol DatabaseProtocol: AnyObject {
     func signUp(email:String,password:String, name:String)
     func signIn(email:String,password:String)
     func addWorkout(newWorkoutName : String , newExerciseSets : [ExerciseSet]) -> Workout
-    func addMealToday() -> Meals
+    func addMealToDate(date: String) -> Meals
+    func addFoodToMeal(mealToAddTo: Meals, foodItem: FoodSet, mealTime: String)
 }
 

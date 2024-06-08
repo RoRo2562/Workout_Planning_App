@@ -11,13 +11,20 @@ protocol FoodAddedDelegate: AnyObject{
     func foodAdded(_ foodItem: FoodSet, _ mealSection: Int)
 }
 
-class FoodTableViewController: UITableViewController,UISearchBarDelegate {
-    var foodDetail: FoodData?
-    var newFood = [FoodData]()
+class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDataListener {
+    var listenerType: ListenerType = .all
+    
+    func onFoodsChange(change: DatabaseChange, foodList: [Food]) {
+        newFood = foodList
+    }
+    
+    var foodDetail: Food?
+    var newFood = [Food]()
     var mealAddedTo: Int = 0
     let CELL_FOOD = "foodCell"
     var indicator = UIActivityIndicatorView()
     weak var databaseController: DatabaseProtocol?
+    weak var coreDatabaseController: CoreDatabaseProtocol?
     var currentRequestIndex: Int = 0
     let MAX_ITEMS_PER_REQUEST = 40
     weak var delegate: FoodAddedDelegate?
@@ -26,6 +33,8 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchController = UISearchController(searchResultsController: nil)
+        
+        // Search bar logic
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search"
@@ -33,6 +42,8 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
         navigationItem.searchController = searchController
         // Ensure the search bar is always visible.
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        // Handle the indicator
         indicator.style = UIActivityIndicatorView.Style.large
         indicator.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(indicator)
@@ -42,8 +53,11 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
         indicator.centerYAnchor.constraint(equalTo:
         view.safeAreaLayoutGuide.centerYAnchor)
         ])
+        
+        
         let appDelegate = (UIApplication.shared.delegate as? AppDelegate)
         databaseController = appDelegate?.databaseController
+        coreDatabaseController = appDelegate?.coreDatabaseController
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -64,8 +78,10 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
         return newFood.count
     }
     
+    // This function takes the string typed in the search bar and loads the list of food items that match the name of the food item
     func requestFood(_ foods: String) async {
-        let query = foods.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let formattedFoods = foods.replacingOccurrences(of: ",", with: " ")
+        let query = formattedFoods.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = URL(string: "https://api.api-ninjas.com/v1/nutrition?query="+query!)!
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("++z2KwnT+PXKDZLnHzEN9Q==z7IB8lELs2QgxqlE", forHTTPHeaderField: "X-Api-Key")
@@ -77,7 +93,35 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
             let foodData = try decoder.decode([FoodData].self, from: data)
             let startIndex = newFood.count
             for food in foodData{
-                newFood.append(food)
+                // Create a new Food Class entity for the food item
+                /*
+                let foodItem = Food()
+                foodItem.name = food.name
+                foodItem.calories = food.calories
+                foodItem.serving_size_g = food.serving_size_g
+                foodItem.fat_total_g = food.fat_total_g
+                foodItem.fat_saturated_g = food.fat_saturated_g
+                foodItem.protein_g = food.protein_g
+                foodItem.sodium_mg = food.sodium_mg
+                foodItem.potassium_mg = food.potassium_mg
+                foodItem.cholesterol_mg = food.cholesterol_mg
+                foodItem.carbohydrates_total_g = food.carbohydrates_total_g
+                foodItem.fiber_g = food.fiber_g
+                foodItem.sugar_g = food.sugar_g
+                */
+                var food_already = false
+                for foods in newFood{
+                    if foods.name == food.name{
+                        food_already = true
+                    }
+                }
+                
+                if food_already == false{
+                    guard let thisFood = coreDatabaseController?.addFood(name: food.name, calories: food.calories, serving_size_g: food.serving_size_g, fat_total_g: food.fat_total_g, fat_saturated_g: food.fat_saturated_g, protein_g: food.protein_g, sodium_mg: food.sodium_mg, potassium_mg: food.potassium_mg, cholesterol_mg: food.cholesterol_mg, carbohydrates_total_g: food.carbohydrates_total_g, fiber_g: food.fiber_g, sugar_g: food.sugar_g) else { return }
+                    
+                    newFood.append(thisFood)
+                }
+                
             }
             tableView.reloadData()
             /*
@@ -100,11 +144,12 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
         }
     }
     
+    // This function checks if the user has finished typing, if they do call the request food function
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text
         else{return}
         navigationItem.searchController?.dismiss(animated: true)
-        indicator.startAnimating()
+        indicator.startAnimating() // Shows the load animation
         Task {
             URLSession.shared.invalidateAndCancel()
             currentRequestIndex = 0
@@ -161,52 +206,10 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate {
         
     }
     
-    
-    
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        coreDatabaseController?.addListener(listener: self)
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

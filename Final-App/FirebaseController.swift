@@ -86,21 +86,16 @@ class FirebaseController: NSObject, DatabaseProtocol {
         return newWorkout
     }
     
-    func addMealToday() -> Meals{
+    func addMealToDate(date: String) -> Meals{
         let newMeal = Meals()
         mealsRef = database.collection("meals")
-        
-        let todaysDate = NSDate()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd-MM-yyyy"
-        let dateInFormat = dateFormatter.string(from: todaysDate as Date)
         
         let user = Auth.auth().currentUser
         
         if let userId = user?.uid {
             usersRef = database.collection("users")
             newMeal.userId = userId
-            newMeal.mealDate = dateInFormat
+            newMeal.mealDate = date
             
             do {
                 if let mealsRef = try mealsRef?.addDocument(from: newMeal){
@@ -112,6 +107,22 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
         }
         return newMeal
+    }
+    
+    
+    func addFoodToMeal(mealToAddTo: Meals, foodItem: FoodSet, mealTime: String){
+        mealsRef = database.collection("meals")
+        guard let mealId = mealToAddTo.id else{
+            return
+        }
+        do {
+            if let mealsRef = try mealsRef?.document(mealId){
+                mealsRef.updateData([mealTime : FieldValue.arrayUnion([foodItem])])
+            }
+        }
+        catch{
+            print("Failed to serialise meal")
+        }
     }
     
     func addExerciseToWorkout(exercise: ExercisesData) {
@@ -197,20 +208,15 @@ class FirebaseController: NSObject, DatabaseProtocol {
     }
     
     func getMealByID(_ id:String) async -> Meals?{
-        mealsRef = database.collection("workouts")
+        mealsRef = database.collection("meals")
         do{
             let mealItem = try await mealsRef?.document(id).getDocument()
             var currentMeal = Meals()
             guard let meal = try mealItem?.data(as:Meals.self) else{
                 return nil
             }
-            // This section gets todays date to see if the meal we have found in the list of meals is todays meals
-            let todaysDate = NSDate()
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd-MM-yyyy"
-            let dateInFormat = dateFormatter.string(from: todaysDate as Date)
-            
-            // We compare the date of the meals in the list of meals to todays date, if its not today then we don't want to display the data
+            meal.id = id
+        
             currentMeal = meal
             return currentMeal
             
@@ -275,7 +281,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     }
     
     func parseWorkoutSnapshot(snapshot: QueryDocumentSnapshot) async{
-        guard let loggedUser = currentUser else{
+        guard currentUser != nil else{
             return
         }
         userData = User()
@@ -295,14 +301,15 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 if let mealItem = await getMealByID(reference){
                     userData.meals.append(mealItem)
                 }
+                
             }
-            // We want to check if the user has not logged in today which would result in no meal being stored for today
+            
         }
         
         listeners.invoke { (listener) in
             if listener.listenerType == ListenerType.user || listener.listenerType == ListenerType.all {
                 listener.onWorkoutsChange(change: .update, workouts: userData.workouts)
-                listener.onMealsChange(change: .update, todaysMeal: userData.meals)
+                listener.onMealsChange(change: .update, meals: userData.meals)
             }
         }
         
@@ -317,7 +324,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     func signOut(){
         do{
-            let authResult: () = try authController.signOut()
+            let _: () = try authController.signOut()
         }
         catch{
             print("Couldn't Sign out")

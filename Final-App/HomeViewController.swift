@@ -7,9 +7,11 @@
 
 import UIKit
 import Firebase
+import HealthKit
 
 class HomeViewController: UIViewController, DatabaseListener {
-    func onMealsChange(change: DatabaseChange, todaysMeal: [Meals]) {
+    let healthStore = HKHealthStore()
+    func onMealsChange(change: DatabaseChange, meals: [Meals]) {
         
     }
     
@@ -41,6 +43,9 @@ class HomeViewController: UIViewController, DatabaseListener {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
+        if HKHealthStore.isHealthDataAvailable(){
+            
+        }
         
         
         //welcomeLabel.text

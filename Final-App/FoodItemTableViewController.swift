@@ -8,7 +8,7 @@
 import UIKit
 
 class FoodItemTableViewController: UITableViewController {
-    var currentFood: FoodData?
+    var currentFood: Food?
     override func viewDidLoad() {
         super.viewDidLoad()
 

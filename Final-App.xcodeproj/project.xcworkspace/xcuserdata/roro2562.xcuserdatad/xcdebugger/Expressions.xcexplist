@@ -3,18 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in ExercisesTableViewController.updateSearchResults(for:):ExercisesTableViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "searchController.searchBar.selectedScopeButtonIndex">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in FirebaseController.signIn(email:password:):FirebaseController.swift">
+         contextName = "AddWorkoutViewController.addWorkoutToUser(_:):AddWorkoutViewController.swift">
       </ContextState>
       <ContextState
          contextName = "HomeViewController.viewDidLoad():HomeViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in FirebaseController.signIn(email:password:):FirebaseController.swift">
       </ContextState>
       <ContextState
          contextName = "ExerciseSetTableViewCell.configure(with:):ExerciseSetTableViewCell.swift">
@@ -64,6 +59,17 @@
          contextName = "FirebaseController.addWorkout(newWorkoutName:newExerciseSets:):FirebaseController.swift">
       </ContextState>
       <ContextState
+         contextName = "NutritionHomeViewController.dateSelection(_:didSelectDate:):NutritionHomeViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NutritionViewController.foodAdded(_:_:):NutritionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "NutritionViewController.tableView(_:cellForRowAt:):NutritionViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -82,6 +88,12 @@
       </ContextState>
       <ContextState
          contextName = "ExercisesTableViewController.tableView(_:didSelectRowAt:):ExercisesTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseController.addMealToDate(date:):FirebaseController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FirebaseController.getMealByID(_:):FirebaseController.swift">
       </ContextState>
       <ContextState
          contextName = "WorkoutViewController.viewDidLoad():WorkoutViewController.swift">
@@ -108,6 +120,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "FoodTableViewController.requestFood(_:):FoodTableViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "NutritionViewController.onUserChange(change:currentUser:):NutritionViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "WorkoutsViewController.onUserChange(change:currentUser:):WorkoutsViewController.swift">
       </ContextState>
       <ContextState
@@ -117,7 +135,15 @@
          contextName = "AddWorkoutViewController.tableView(_:cellForRowAt:):AddWorkoutViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "AddWorkoutViewController.addWorkoutToUser(_:):AddWorkoutViewController.swift">
+         contextName = "FirebaseController.addFoodToMeal(mealToAddTo:foodItem:mealTime:):FirebaseController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ExercisesTableViewController.updateSearchResults(for:):ExercisesTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "searchController.searchBar.selectedScopeButtonIndex">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>
