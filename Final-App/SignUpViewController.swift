@@ -7,6 +7,7 @@
 
 import UIKit
 
+// This class handles the sign ups and logs the user in once they sign up
 class SignUpViewController: UIViewController,AuthenticationListener {
 
     weak var databaseController: FirebaseController?
@@ -17,6 +18,7 @@ class SignUpViewController: UIViewController,AuthenticationListener {
         guard let email = emailTextField.text , let password = passwordTextField.text, let name = nameTextField.text else{
             return
         }
+        // Checks that all the text fields are full or not, If they are empty, print the error message
         if name.isEmpty || email.isEmpty || password.isEmpty{
             var errorMsg = "Please ensure all fields are filled:\n"
             if name.isEmpty {
@@ -47,7 +49,7 @@ class SignUpViewController: UIViewController,AuthenticationListener {
     }
     
     func signUpSuccess() {
-        //navigationController?.popViewController(animated: true)
+        // Brings us to the home page logged in with the sign up values
         performSegue(withIdentifier: "signUpSegue", sender: Any?.self)
     }
     
@@ -55,19 +57,11 @@ class SignUpViewController: UIViewController,AuthenticationListener {
         
     }
     
+    // If the sign up values are not valid print the erro
     func onAuthenticationError(error: any Error) {
         displayMessage(title: "Error", message: error.localizedDescription)
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

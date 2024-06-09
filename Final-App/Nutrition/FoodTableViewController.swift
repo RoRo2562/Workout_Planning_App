@@ -10,7 +10,7 @@ import UIKit
 protocol FoodAddedDelegate: AnyObject{
     func foodAdded(_ foodItem: FoodSet, _ mealSection: Int)
 }
-
+// This class is for the view controller that displays the list of food in persistent storage or the food user searches
 class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDataListener, DatabaseListener {
     func onUserChange(change: DatabaseChange, currentUser: User) {
         
@@ -71,26 +71,19 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDa
         databaseController = appDelegate?.databaseController
         coreDatabaseController = appDelegate?.coreDatabaseController
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return newFood.count
+        return newFood.count // Number of food items
     }
     
-    // This function takes the string typed in the search bar and loads the list of food items that match the name of the food item
+    // This function takes the string typed in the search bar and loads the list of food items that match the name of the food item, values default to 100g unless stated by the user
     func requestFood(_ foods: String) async {
         let formattedFoods = foods.replacingOccurrences(of: ",", with: " ")
         let query = formattedFoods.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
@@ -98,37 +91,21 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDa
         var urlRequest = URLRequest(url: url)
         urlRequest.setValue("++z2KwnT+PXKDZLnHzEN9Q==z7IB8lELs2QgxqlE", forHTTPHeaderField: "X-Api-Key")
         do {
-            let (data,response) = try await URLSession.shared.data(for: urlRequest)
+            let (data,_) = try await URLSession.shared.data(for: urlRequest)
             indicator.stopAnimating()
             let decoder = JSONDecoder()
             print(String(decoding: data, as: UTF8.self))
             let foodData = try decoder.decode([FoodData].self, from: data)
-            let startIndex = newFood.count
+            _ = newFood.count
             for food in foodData{
-                // Create a new Food Class entity for the food item
-                /*
-                let foodItem = Food()
-                foodItem.name = food.name
-                foodItem.calories = food.calories
-                foodItem.serving_size_g = food.serving_size_g
-                foodItem.fat_total_g = food.fat_total_g
-                foodItem.fat_saturated_g = food.fat_saturated_g
-                foodItem.protein_g = food.protein_g
-                foodItem.sodium_mg = food.sodium_mg
-                foodItem.potassium_mg = food.potassium_mg
-                foodItem.cholesterol_mg = food.cholesterol_mg
-                foodItem.carbohydrates_total_g = food.carbohydrates_total_g
-                foodItem.fiber_g = food.fiber_g
-                foodItem.sugar_g = food.sugar_g
-                */
                 var food_already = false
-                for foods in newFood{
+                for foods in newFood{ // Check if the food is already in persistent storage
                     if foods.name == food.name{
                         food_already = true
                     }
                 }
                 
-                if food_already == false{
+                if food_already == false{ // If not we add the foods to the list of foods in persistent storage
                     guard let thisFood = coreDatabaseController?.addFood(name: food.name, calories: food.calories, serving_size_g: food.serving_size_g, fat_total_g: food.fat_total_g, fat_saturated_g: food.fat_saturated_g, protein_g: food.protein_g, sodium_mg: food.sodium_mg, potassium_mg: food.potassium_mg, cholesterol_mg: food.cholesterol_mg, carbohydrates_total_g: food.carbohydrates_total_g, fiber_g: food.fiber_g, sugar_g: food.sugar_g) else { return }
                     
                     newFood.append(thisFood)
@@ -136,20 +113,7 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDa
                 
             }
             tableView.reloadData()
-            /*
-            tableView.performBatchUpdates({
-                var indexPaths = [IndexPath]()
-                
-                for i in 0..<newFood.count{
-                    indexPaths.append(IndexPath(row: startIndex + i, section: 0))
-                }
-                tableView.insertRows(at: indexPaths, with: .automatic)
-            }, completion: nil)*/
-            
-            
-            
-            
-            
+  
         }
         catch let error {
             print(error)
@@ -170,17 +134,17 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDa
     }
 
 
-    
+    // All cells have the food name and the number of calories per 100g
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_FOOD, for: indexPath)
         let food = newFood[indexPath.row]
         cell.textLabel?.text = food.name
         cell.detailTextLabel?.text = String(food.calories) + " calories"
-        // Configure the cell...
 
         return cell
     }
     
+    // Adds the food item to the meal table based on the meal time we were trying to add it to
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let foodItem = newFood[indexPath.row]
         let foodSet = FoodSet()
@@ -203,6 +167,7 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDa
         
     }
     
+    // Allows us to see the data about the food when we click on info
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         foodDetail = newFood[indexPath.row]
         performSegue(withIdentifier: "viewFoodSegue", sender: Any?.self)
@@ -212,7 +177,7 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDa
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewFoodSegue"{
             let destination = segue.destination as! FoodItemTableViewController
-            destination.currentFood = foodDetail
+            destination.currentFood = foodDetail // Sets the food data for the food we want to see
 
         }
         

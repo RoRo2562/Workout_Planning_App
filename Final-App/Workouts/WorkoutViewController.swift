@@ -7,13 +7,15 @@
 
 import UIKit
 
+// This is a view controller that displays the data of a current workout
 class WorkoutViewController: UIViewController, cellTextFieldDelegate {
     func updateExerciseSet(with kgText: Int?, repsText: Int?, for cell: ExerciseSetTableViewCell) {
         
     }
     
     @IBOutlet weak var workoutTableView: UITableView!
-    var currentWorkout: Workout?
+    
+    var currentWorkout: Workout? // The current workout
     
     weak var firebaseController: FirebaseController?
     weak var databaseController: DatabaseProtocol?
@@ -24,31 +26,20 @@ class WorkoutViewController: UIViewController, cellTextFieldDelegate {
             navigationItem.title = "NO WORKOUT SELECTED"
             return
         }
-        navigationItem.title = currentWorkout.workoutName
+        navigationItem.title = currentWorkout.workoutName // Sets the title as the workouts name
         let appDelegate = (UIApplication.shared.delegate as? AppDelegate)
-        let exerciseSets = currentWorkout.exerciseSets[0] 
         databaseController = appDelegate?.databaseController as? FirebaseController
         
+        // Register the custom cells I created
         workoutTableView.register(UINib(nibName: "ExerciseSetTableViewCell", bundle: nil),forCellReuseIdentifier: ExerciseSetTableViewCell.indentifier)
         workoutTableView.register(UINib(nibName: "ExerciseSetTitleTableViewCell", bundle: nil), forCellReuseIdentifier: ExerciseSetTitleTableViewCell.identifier)
+        
         workoutTableView.delegate = self
         workoutTableView.dataSource = self
-        workoutTableView.reloadData()
+        workoutTableView.reloadData() // Load the data into the table
 
-        
-        // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -59,7 +50,7 @@ extension WorkoutViewController : UITableViewDelegate {
 
 extension WorkoutViewController : UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return currentWorkout?.exerciseSets.count ?? 1
+        return currentWorkout?.exerciseSets.count ?? 1 // The number of sections is the number of different workouts in the
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,7 +60,7 @@ extension WorkoutViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 1{
+        if indexPath.row == 1{ // I want the second row to display my column titles which is my custom cell
             let titleCell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTitleTableViewCell.identifier, for: indexPath) as! ExerciseSetTitleTableViewCell
             return titleCell
         }
@@ -78,44 +69,26 @@ extension WorkoutViewController : UITableViewDataSource {
             return addSetCell
         }
         
-        if indexPath.row > 1{
+        if indexPath.row > 1{ // For every row thats not the first two rows and not the last row, display the set data stored in the workout
             let setCell = tableView.dequeueReusableCell(withIdentifier: ExerciseSetTableViewCell.indentifier, for: indexPath) as! ExerciseSetTableViewCell
             setCell.configure(with: indexPath.row-1, delegate: self)
             print(indexPath.row)
-            //let currentExercise = currentWorkout?.exerciseSets[indexPath.section].setReps?[indexPath.row - 2]
-            setCell.repsTextField.text = String(currentWorkout?.exerciseSets[indexPath.section].setReps?[indexPath.row - 2] ?? 0)
+            setCell.repsTextField.text = String(currentWorkout?.exerciseSets[indexPath.section].setReps?[indexPath.row - 2] ?? 0) 
+            // Set the reps from the workout
             setCell.kgTextField.text = String(currentWorkout?.exerciseSets[indexPath.section].setWeight?[indexPath.row - 2] ?? 0)
+            // Set the weight from the workout
             return setCell
         }
         
         
         let exerciseTitleCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        exerciseTitleCell.textLabel?.text = currentWorkout?.exerciseSets[indexPath.section].exerciseName
+        exerciseTitleCell.textLabel?.text = currentWorkout?.exerciseSets[indexPath.section].exerciseName // Display the exercise name as the first row in each section
         return exerciseTitleCell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 50
+        return 50 // Set the cell height 
     }
-    /*
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let number = indexPath.count
-        if indexPath.row == (currentWorkout?.exerciseSets[indexPath.section].setReps?.count ?? 0) + 2{
-            let currentExercise = self.currentWorkout?.exerciseSets[indexPath.section]
-            currentExercise.setReps?.append(0)
-            currentExercise.setWeight?.append(0)
-            exercisesTableView.reloadData()
-        }
-        
-    }*/
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       if segue.identifier == "addExerciseSegue"{
-           let destination = segue.destination as! ExercisesTableViewController
-           destination.delegate = self
-       }
-       
-   }*/
-    
+
     
 }
