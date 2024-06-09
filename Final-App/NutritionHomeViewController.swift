@@ -42,7 +42,7 @@ class NutritionHomeViewController: UIViewController, UICalendarSelectionSingleDa
                 self.mealSelected = meals
             }
         }
-        if self.mealSelected == nil{
+        if self.mealSelected?.mealDate != dateString{
             self.mealSelected = self.databaseController?.addMealToDate(date: dateString)
         }
         performSegue(withIdentifier: "viewDietSegue", sender: Any?.self)

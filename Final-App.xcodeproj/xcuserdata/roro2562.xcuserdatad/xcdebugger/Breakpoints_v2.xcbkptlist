@@ -110,8 +110,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
             landmarkName = "setupUserListener()"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "235"
-            endingLineNumber = "235"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "setupUserListener()"
             landmarkType = "7">
          </BreakpointContent>
@@ -158,8 +158,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "245"
-            endingLineNumber = "245"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "setupUserListener()"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "signUp(email:password:name:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +270,8 @@
             filePath = "Final-App/FoodTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "requestFood(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -574,8 +574,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "parseWorkoutSnapshot(snapshot:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -590,8 +590,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
             landmarkName = "parseWorkoutSnapshot(snapshot:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -770,106 +770,6 @@
             endingLineNumber = "11"
             landmarkName = "ExerciseTableViewController"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "8E507313-5E4A-415D-A656-A631AE59DFB3 - 8c60574311d9498c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Final_App.ExerciseTableViewController.currentExercise.getter : Swift.Optional&lt;Final_App.ExercisesData&gt;"
-                  moduleName = "Final-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roro2562/Desktop/FIT3178/FIT3178-Final-Assessment/Final-App/Final-App/ExerciseTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0">
-               </Location>
-               <Location
-                  uuid = "8E507313-5E4A-415D-A656-A631AE59DFB3 - f29662c704fb445b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Final_App.ExerciseTableViewController.currentExercise.setter : Swift.Optional&lt;Final_App.ExercisesData&gt;"
-                  moduleName = "Final-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roro2562/Desktop/FIT3178/FIT3178-Final-Assessment/Final-App/Final-App/ExerciseTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11">
-               </Location>
-               <Location
-                  uuid = "8E507313-5E4A-415D-A656-A631AE59DFB3 - 14865a5301e1fc68"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Final_App.ExerciseTableViewController.currentExercise.modify : Swift.Optional&lt;Final_App.ExercisesData&gt;"
-                  moduleName = "Final-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roro2562/Desktop/FIT3178/FIT3178-Final-Assessment/Final-App/Final-App/ExerciseTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11">
-               </Location>
-               <Location
-                  uuid = "8E507313-5E4A-415D-A656-A631AE59DFB3 - 466c66a60d91bf04"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Final_App.ExerciseTableViewController.currentExercise.modify : Swift.Optional&lt;Final_App.ExercisesData&gt; with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "Final-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roro2562/Desktop/FIT3178/FIT3178-Final-Assessment/Final-App/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0">
-               </Location>
-               <Location
-                  uuid = "8E507313-5E4A-415D-A656-A631AE59DFB3 - 281e552a7b442d8e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Final_App.ExerciseTableViewController.init(style: __C.UITableViewStyle) -&gt; Final_App.ExerciseTableViewController"
-                  moduleName = "Final-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roro2562/Desktop/FIT3178/FIT3178-Final-Assessment/Final-App/Final-App/ExerciseTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11">
-               </Location>
-               <Location
-                  uuid = "8E507313-5E4A-415D-A656-A631AE59DFB3 - 1fc6316158e032aa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Final_App.ExerciseTableViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; Final_App.ExerciseTableViewController"
-                  moduleName = "Final-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roro2562/Desktop/FIT3178/FIT3178-Final-Assessment/Final-App/Final-App/ExerciseTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11">
-               </Location>
-               <Location
-                  uuid = "8E507313-5E4A-415D-A656-A631AE59DFB3 - 860f8ab28106ebbc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Final_App.ExerciseTableViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;Final_App.ExerciseTableViewController&gt;"
-                  moduleName = "Final-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/roro2562/Desktop/FIT3178/FIT3178-Final-Assessment/Final-App/Final-App/ExerciseTableViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "11"
-                  endingLineNumber = "11">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -914,8 +814,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
             landmarkName = "parseWorkoutSnapshot(snapshot:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1042,8 +942,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "319"
+            endingLineNumber = "319"
             landmarkName = "parseWorkoutSnapshot(snapshot:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1058,8 +958,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "306"
+            endingLineNumber = "306"
             landmarkName = "parseWorkoutSnapshot(snapshot:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1074,8 +974,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
             landmarkName = "getMealByID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1090,8 +990,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "parseWorkoutSnapshot(snapshot:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1122,8 +1022,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "parseWorkoutSnapshot(snapshot:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1154,8 +1054,8 @@
             filePath = "Final-App/FoodTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "requestFood(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1170,8 +1070,8 @@
             filePath = "Final-App/FoodTableViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "requestFood(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1218,8 +1118,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "getMealByID(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1266,8 +1166,8 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "addFoodToMeal(mealToAddTo:foodItem:mealTime:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1282,9 +1182,73 @@
             filePath = "Final-App/FirebaseController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "addFoodToMeal(mealToAddTo:foodItem:mealTime:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0297BFAE-9717-4717-9E39-AC7069CC3E98"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Final-App/FoodItemTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "viewChartButton(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1F1734C5-F22A-4E9E-BA7E-AA7A868B4D06"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Final-App/FoodItemTableViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
+            landmarkName = "prepare(for:sender:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "837F23A2-36F0-461C-82F5-8C724D68711C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Final-App/NutritionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "tableView(_:didSelectRowAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "40860F5F-4C77-4DA3-A483-C87904CFE54D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Final-App/NutritionViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

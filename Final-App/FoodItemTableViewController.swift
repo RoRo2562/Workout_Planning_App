@@ -9,8 +9,16 @@ import UIKit
 
 class FoodItemTableViewController: UITableViewController {
     var currentFood: Food?
+    
+    @IBOutlet weak var rightButton: UIBarButtonItem!
+    @IBAction func viewChartButton(_ sender: Any) {
+        performSegue(withIdentifier: "viewChartSegue", sender: Any?.self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = currentFood?.name
+        navigationItem.rightBarButtonItem = rightButton
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -23,7 +31,7 @@ class FoodItemTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 12
+        return 13
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -128,12 +136,26 @@ class FoodItemTableViewController: UITableViewController {
             return cell
         }
         
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
-        cell.textLabel?.text = String(currentFood?.sugar_g ?? 0) + " g"
+        if indexPath.section == 11{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath)
+            cell.textLabel?.text = String(currentFood?.sugar_g ?? 0) + " g"
 
+            return cell
+        }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath)
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+       if segue.identifier == "viewChartSegue"{
+           let destination = segue.destination as! FoodPieChartViewController
+           destination.currentFood = self.currentFood
+       }
+       
+   }
+    
+    
 
 
     /*

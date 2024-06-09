@@ -574,17 +574,70 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="buttonCell" id="ewo-qf-i1s">
+                                <rect key="frame" x="20" y="142.66666793823242" width="353" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ewo-qf-i1s" id="nzX-cR-wDv">
+                                    <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFj-Iz-klO">
+                                            <rect key="frame" x="12" y="4" width="330" height="35"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" title="View Data in Chart">
+                                                <color key="baseBackgroundColor" systemColor="systemPinkColor"/>
+                                            </buttonConfiguration>
+                                            <connections>
+                                                <segue destination="YwZ-eH-Oj4" kind="show" identifier="viewChartSegue" id="X4r-yu-Z9M"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="gXS-Yz-Qd9" id="YGB-kB-2cG"/>
                             <outlet property="delegate" destination="gXS-Yz-Qd9" id="OJS-gg-Y0i"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ai8-So-cjX"/>
+                    <navigationItem key="navigationItem" id="ai8-So-cjX">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="jAe-Qd-MWX">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="UsR-rB-CNG">
+                                <rect key="frame" x="269.33333333333331" y="5" width="107.66666666666669" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="View Chart"/>
+                            </button>
+                            <connections>
+                                <action selector="viewChartButton:" destination="gXS-Yz-Qd9" id="eN2-as-D9c"/>
+                                <segue destination="YwZ-eH-Oj4" kind="show" identifier="viewChartSegue" id="JbH-hD-sWi"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="rightButton" destination="jAe-Qd-MWX" id="1GA-Pm-ofE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mmC-Oi-bLy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1369" y="3073"/>
+            <point key="canvasLocation" x="1368.7022900763359" y="3072.535211267606"/>
+        </scene>
+        <!--Food Pie Chart View Controller-->
+        <scene sceneID="qiS-f3-Ap1">
+            <objects>
+                <viewController id="YwZ-eH-Oj4" customClass="FoodPieChartViewController" customModule="Final_App" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fQ7-gY-5dC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="KlE-vW-apB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="XXJ-b5-HCG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oq8-cH-b5m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2294" y="3073"/>
         </scene>
         <!--Exercises Table View Controller-->
         <scene sceneID="MiC-0U-fax">
@@ -889,6 +942,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="lgP-fe-kZn"/>
         <segue reference="DeE-z3-gKm"/>
+        <segue reference="JbH-hD-sWi"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="carrot.fill" catalog="system" width="128" height="122"/>

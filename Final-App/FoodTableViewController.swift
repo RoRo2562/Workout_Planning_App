@@ -11,7 +11,19 @@ protocol FoodAddedDelegate: AnyObject{
     func foodAdded(_ foodItem: FoodSet, _ mealSection: Int)
 }
 
-class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDataListener {
+class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDataListener, DatabaseListener {
+    func onUserChange(change: DatabaseChange, currentUser: User) {
+        
+    }
+    
+    func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
+        
+    }
+    
+    func onMealsChange(change: DatabaseChange, meals: [Meals]) {
+        
+    }
+    
     var listenerType: ListenerType = .all
     
     func onFoodsChange(change: DatabaseChange, foodList: [Food]) {
@@ -209,6 +221,12 @@ class FoodTableViewController: UITableViewController,UISearchBarDelegate, CoreDa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         coreDatabaseController?.addListener(listener: self)
+    }
+    
+    // Remove the listeners when the view dissappears
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        coreDatabaseController?.removeListener(listener: self)
     }
 
 

@@ -112,12 +112,29 @@ class FirebaseController: NSObject, DatabaseProtocol {
     
     func addFoodToMeal(mealToAddTo: Meals, foodItem: FoodSet, mealTime: String){
         mealsRef = database.collection("meals")
+        var firestoreData: [String: Any]{
+            return [
+                "name": foodItem.name,
+                "calories": foodItem.calories,
+                "serving_size_g": foodItem.serving_size_g,
+                "fat_total_g": foodItem.fat_total_g,
+                "fat_saturated_g": foodItem.fat_saturated_g,
+                "protein_g": foodItem.protein_g,
+                "sodium_mg": foodItem.sodium_mg,
+                "potassium_mg": foodItem.potassium_mg,
+                "cholesterol_mg": foodItem.cholesterol_mg,
+                "carbohydrates_total_g": foodItem.carbohydrates_total_g,
+                "fiber_g": foodItem.fiber_g,
+                "sugar_g": foodItem.sugar_g,
+            
+            ]
+        }
         guard let mealId = mealToAddTo.id else{
             return
         }
         do {
             if let mealsRef = try mealsRef?.document(mealId){
-                mealsRef.updateData([mealTime : FieldValue.arrayUnion([foodItem])])
+                mealsRef.updateData([mealTime : FieldValue.arrayUnion([firestoreData])])
             }
         }
         catch{
