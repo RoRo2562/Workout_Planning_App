@@ -189,6 +189,8 @@
 				40C802652BD7716F00685252 /* User.swift */,
 				401F29632BEA12590066FC1C /* Workout.swift */,
 				405E5A292C102D8F0070C7F3 /* Meals.swift */,
+				405E5A2B2C102F0A0070C7F3 /* FoodSet.swift */,
+				401F29612BEA11B40066FC1C /* ExerciseSet.swift */,
 			);
 			path = Codables;
 			sourceTree = "<group>";
@@ -200,6 +202,7 @@
 				40BD84AB2BF9B204002D9E51 /* WorkoutViewController.swift */,
 				401F294F2BE773620066FC1C /* AddWorkoutViewController.swift */,
 				40007BD52BE08FAE00F90F8B /* ExercisesTableViewController.swift */,
+				40BD84B12BFC7928002D9E51 /* ExerciseTableViewController.swift */,
 			);
 			path = Workouts;
 			sourceTree = "<group>";
@@ -210,6 +213,18 @@
 				405E5A352C12EE960070C7F3 /* FinalApp-DataModel.xcdatamodeld */,
 			);
 			path = DataModel;
+			sourceTree = "<group>";
+		};
+		405E5A4C2C15D9A70070C7F3 /* Nutrition */ = {
+			isa = PBXGroup;
+			children = (
+				405E5A302C11B8040070C7F3 /* NutritionHomeViewController.swift */,
+				401F29652BF31E3E0066FC1C /* NutritionViewController.swift */,
+				401F294D2BE763360066FC1C /* FoodTableViewController.swift */,
+				405E5A2D2C1050B70070C7F3 /* FoodItemTableViewController.swift */,
+				405E5A442C1436AC0070C7F3 /* FoodPieChartViewController.swift */,
+			);
+			path = Nutrition;
 			sourceTree = "<group>";
 		};
 		40C802052BD760C200685252 = {
@@ -234,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				405E5A382C12EEA80070C7F3 /* DataModel */,
+				405E5A4C2C15D9A70070C7F3 /* Nutrition */,
 				405E5A342C12EC050070C7F3 /* Workouts */,
 				405E5A332C12EB310070C7F3 /* Codables */,
 				405E5A2F2C118E0C0070C7F3 /* Final-App.entitlements */,
@@ -249,21 +265,12 @@
 				40C8021C2BD760C500685252 /* LaunchScreen.storyboard */,
 				40C8021F2BD760C500685252 /* Info.plist */,
 				40C8022D2BD76E5A00685252 /* FirebaseController.swift */,
-				405E5A2B2C102F0A0070C7F3 /* FoodSet.swift */,
-				401F29612BEA11B40066FC1C /* ExerciseSet.swift */,
 				40BD84AD2BFC50C8002D9E51 /* ExerciseSetData.swift */,
-				40C802692BD7A1A900685252 /* DisplayMessage.swift */,
 				40C8026D2BD7A7BF00685252 /* GoogleService-Info.plist */,
 				40C8026F2BD7ADA100685252 /* HomeViewController.swift */,
-				405E5A302C11B8040070C7F3 /* NutritionHomeViewController.swift */,
-				401F29652BF31E3E0066FC1C /* NutritionViewController.swift */,
-				401F294D2BE763360066FC1C /* FoodTableViewController.swift */,
 				40007BD92BE0B53D00F90F8B /* FoodData.swift */,
 				40007BD72BE0914A00F90F8B /* ExercisesData.swift */,
 				40BD84AF2BFC761B002D9E51 /* HealthKitManager.swift */,
-				40BD84B12BFC7928002D9E51 /* ExerciseTableViewController.swift */,
-				405E5A2D2C1050B70070C7F3 /* FoodItemTableViewController.swift */,
-				405E5A442C1436AC0070C7F3 /* FoodPieChartViewController.swift */,
 				405E5A4A2C1443A70070C7F3 /* ChartUIView.swift */,
 			);
 			path = "Final-App";
@@ -272,6 +279,7 @@
 		40C802272BD768C900685252 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				40C802692BD7A1A900685252 /* DisplayMessage.swift */,
 				40C802282BD768E600685252 /* DatabaseProtocol.swift */,
 				40C802672BD7730B00685252 /* MulticastDelegate.swift */,
 				405E5A3D2C12F5730070C7F3 /* CoreDataController.swift */,

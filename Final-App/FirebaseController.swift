@@ -32,6 +32,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
+    // Adds the listener
     func addListener(listener: DatabaseListener){
         listeners.addDelegate(listener)
         
@@ -42,9 +43,13 @@ class FirebaseController: NSObject, DatabaseProtocol {
             listener.onWorkoutsChange(change: .update, workouts: userData.workouts)
         }
     }
+    
+    // Removes the listener
     func removeListener(listener: DatabaseListener){
         listeners.removeDelegate(listener)
     }
+    
+    // Adds the user to the database
     func addUser(documentId:String,email:String,name:String) -> User {
         let currentUser = User()
         currentUser.email = email
@@ -58,12 +63,11 @@ class FirebaseController: NSObject, DatabaseProtocol {
         } catch {
             print("Failed to serialize user")
         }
-        /*if let userRef = usersRef?.addDocument(data: ["team" : addTeam(teamName: user.uid)]){
-            currentUser.id = userRef.documentID
-        }*/
+
         return currentUser
     }
     
+    // Adds the workout the the base collection workouts in the database and adds it to the users list of workouts based on which user added the workout
     func addWorkout(newWorkoutName : String , newExerciseSets : [ExerciseSet]) -> Workout{
         let newWorkout = Workout()
         newWorkout.workoutName = newWorkoutName
@@ -86,6 +90,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         return newWorkout
     }
     
+    // Adds the meal based on date selected to the collection of meals and updates the user's list of meals that selected the meal
     func addMealToDate(date: String) -> Meals{
         let newMeal = Meals()
         mealsRef = database.collection("meals")
@@ -109,7 +114,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         return newMeal
     }
     
-    
+    // Updates the meal in the database whenever a food item is added to the list of meals
     func addFoodToMeal(mealToAddTo: Meals, foodItem: FoodSet, mealTime: String){
         mealsRef = database.collection("meals")
         var firestoreData: [String: Any]{
@@ -142,6 +147,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    // Adds an exercise to the workout
     func addExerciseToWorkout(exercise: ExercisesData) {
         let exerciseSet = ExerciseSet()
         exerciseSet.exerciseName = exercise.name
@@ -159,13 +165,13 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
-    
+    // Handles signup checks
     func signUp(email: String, password:String, name: String){
         Task {
             do{
                 let authResult = try await authController.createUser(withEmail: email, password: password)
                 
-                //let user = User()
+                
                 self.currentUser = authResult.user
                 self.userData = addUser(documentId: authResult.user.uid,email: email,name: name)
                 
@@ -173,11 +179,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
                     self.authenticationListener?.signUpSuccess()
                 }
                 self.setupUserListener()
-                //self.setupWorkoutListener()
                 
-                /*if let userRef = try await usersRef?.addDocument(data: ["team" : addTeam(teamName: authResult.user.uid)]){
-                    user.id = userRef.documentID
-                }*/
                 
             }
             catch{
@@ -188,7 +190,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
 
-    
+    // Handles sign in checks
     func signIn(email: String, password: String) {
         Task{
             do{
@@ -209,6 +211,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    // Gets the workout based on the document id
     func getWorkoutByID(_ id:String) async -> Workout?{
         workoutsRef = database.collection("workouts")
         
@@ -224,6 +227,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
+    // Gets the meal based on the meal id
     func getMealByID(_ id:String) async -> Meals?{
         mealsRef = database.collection("meals")
         do{
@@ -242,6 +246,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    // Sets up the listeners for changes in users
     func setupUserListener(){
         usersRef = database.collection("users")
         guard let userId = currentUser?.uid else{
@@ -262,6 +267,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 }
     }
     
+    // Sets up to listen for changes in workouts
     func setupWorkoutListener(){
         workoutsRef = database.collection("workouts")
         guard let userId = currentUser?.uid else{
@@ -281,6 +287,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
+    // Parse the users
     func parseUsersSnapshot(snapshot: QueryDocumentSnapshot){
         userData = User()
         userData.name = snapshot.data()["name"] as? String
@@ -297,6 +304,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
+    // Parse the workouts and meals
     func parseWorkoutSnapshot(snapshot: QueryDocumentSnapshot) async{
         guard currentUser != nil else{
             return
@@ -332,13 +340,8 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
-    func parseMealsSnapshot(snapshot: QueryDocumentSnapshot) async{
-        guard let loggedUser = currentUser else{
-            return
-        }
-        
-    }
-    
+
+    // Signs the user out
     func signOut(){
         do{
             let _: () = try authController.signOut()

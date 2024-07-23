@@ -15,6 +15,7 @@ class FoodPieChartViewController: UIViewController {
     var currentFood: Food?
     var data: [FoodDataStructure] = []
     
+    // Sets the data of the piechart based on the current food, mg is divided by 1000 as 1000mg = 1 g
     func set_data(food:Food) -> [FoodDataStructure]{
         var newData: [FoodDataStructure] = []
         
@@ -35,10 +36,10 @@ class FoodPieChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let myFood = self.currentFood{
-            self.data = self.set_data(food: myFood)
+            self.data = self.set_data(food: myFood) // sets the data based on food data
         }
         
-        var rootView = ChartUIView(data: self.data)
+        var rootView = ChartUIView(data: self.data) // sets the chart data
         
         
         
@@ -63,14 +64,6 @@ class FoodPieChartViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

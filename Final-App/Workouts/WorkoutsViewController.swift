@@ -15,7 +15,7 @@ class WorkoutsViewController: UIViewController,DatabaseListener {
     var listenerType: ListenerType = .all
     // The current active user
     var currentUser = User()
-    var myworkouts : [Workout] = [] // List of the workouts
+    var myworkouts : [Workout] = [] // List of the workouts for the user
     weak var databaseController: DatabaseProtocol? // The database controller
     
     @IBOutlet weak var workoutsTableView: UITableView!
@@ -25,7 +25,7 @@ class WorkoutsViewController: UIViewController,DatabaseListener {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         databaseController = appDelegate?.databaseController
-        workoutsTableView.delegate = self
+        workoutsTableView.delegate = self // Sets the table views delegate
         workoutsTableView.dataSource = self
         if let currentName = currentUser.name{
             navigationItem.title = currentName + "'s workouts" // On load change the name
@@ -40,7 +40,7 @@ class WorkoutsViewController: UIViewController,DatabaseListener {
         
     }
     
-    // In this function, we update the users name in navigation title and their list of workouts at login
+    // Everytime the workouts change whether a new user has logged in or a user has added workouts the table view is updated
     func onWorkoutsChange(change: DatabaseChange, workouts: [Workout]) {
         
         myworkouts = workouts

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-
+// Core data for the food that have been recently searched
 extension Food {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Food> {

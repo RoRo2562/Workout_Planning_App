@@ -8,6 +8,7 @@
 import UIKit
 import HorizonCalendar
 
+// This is the nutrition home view controller
 class NutritionHomeViewController: UIViewController, UICalendarSelectionSingleDateDelegate,DatabaseListener {
     
     var listenerType: ListenerType = .all
@@ -18,6 +19,7 @@ class NutritionHomeViewController: UIViewController, UICalendarSelectionSingleDa
 
     
     private var selectedDay: DayComponents?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -25,7 +27,7 @@ class NutritionHomeViewController: UIViewController, UICalendarSelectionSingleDa
         createCalendar()
         
     }
-    
+    // Handles the logic for when a day is selected in the calendar
     func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
         guard let year = dateComponents?.year else{
             return
@@ -36,30 +38,34 @@ class NutritionHomeViewController: UIViewController, UICalendarSelectionSingleDa
         guard let day = dateComponents?.day else{
             return
         }
-        let dateString = "\(String(day))-\(String(month))-\(String(year))"
+        let dateString = "\(String(day))-\(String(month))-\(String(year))" // Formats the date into the same string structure stored in firebase
         for meals in currentUser.meals{
-            if meals.mealDate == dateString{
+            if meals.mealDate == dateString{ // If the date already has existing meal data, load the data
                 self.mealSelected = meals
             }
         }
         if self.mealSelected?.mealDate != dateString{
-            self.mealSelected = self.databaseController?.addMealToDate(date: dateString)
+            self.mealSelected = self.databaseController?.addMealToDate(date: dateString) // Otherwise create a new meal and add it to the database
         }
-        performSegue(withIdentifier: "viewDietSegue", sender: Any?.self)
+        performSegue(withIdentifier: "viewDietSegue", sender: Any?.self) // Transition to the nutrition view controller to see the meal data for the date selected
     }
     
+    // Function that creates the calendar
     func createCalendar() {
         let calendarView = UICalendarView(frame: UIScreen.main.bounds)
+        
+        // Sets up the calendar structure
         calendarView.calendar = .current
         calendarView.tintColor = .red
         let selection = UICalendarSelectionSingleDate(delegate: self)
         calendarView.selectionBehavior = selection
-        
+        // Adds the calendar to the view
         self.view.addSubview(calendarView)
                   
         
     }
     
+    // Sets the current user based on if the user changes
     func onUserChange(change: DatabaseChange, currentUser: User) {
         self.currentUser = currentUser
     }
@@ -68,6 +74,7 @@ class NutritionHomeViewController: UIViewController, UICalendarSelectionSingleDa
         
     }
     
+    // Updates the list of meals if it changes
     func onMealsChange(change: DatabaseChange, meals: [Meals]) {
         self.meals = meals
     }
@@ -85,35 +92,14 @@ class NutritionHomeViewController: UIViewController, UICalendarSelectionSingleDa
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        if segue.identifier == "viewDietSegue"{
            let destination = segue.destination as! NutritionViewController
-           destination.currentMeal = self.mealSelected
+           destination.currentMeal = self.mealSelected // Set the data in the next view controller as the meal selected
        }
        
    }
 
 }
-/*
-extension NutritionHomeViewController: UICalendarSelectionSingleDateDelegate{
-    func dateSelection(_ selection: UICalendarSelectionSingleDate, didSelectDate dateComponents: DateComponents?) {
-        let dateString = "\(String(describing: dateComponents?.year))\(String(describing: dateComponents?.day))\(String(describing: dateComponents?.month))"
-        print(dateString)
-        
-    }
-
-    
-    
-}
-*/
 
 

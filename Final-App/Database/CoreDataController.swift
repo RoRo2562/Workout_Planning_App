@@ -35,6 +35,7 @@ class CoreDataController: NSObject,CoreDatabaseProtocol{
         listeners.removeDelegate(listener)
     }
     
+    // Adds the food to the persistent storage
     func addFood(name: String, calories: Float, serving_size_g: Float, fat_total_g: Float, fat_saturated_g: Float, protein_g: Float, sodium_mg: Float, potassium_mg: Float, cholesterol_mg: Float, carbohydrates_total_g: Float, fiber_g: Float, sugar_g: Float) -> Food {
         
         let food = NSEntityDescription.insertNewObject(forEntityName: "Food", into: persistentContainer.viewContext) as! Food
@@ -56,6 +57,7 @@ class CoreDataController: NSObject,CoreDatabaseProtocol{
         return food
     }
     
+    // Fetches the list of foods from persistent storage
     func fetchAllFoods() -> [Food]{
         var foods = [Food]()
         

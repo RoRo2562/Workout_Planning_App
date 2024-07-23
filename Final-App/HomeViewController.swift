@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import HealthKit
 
+// This is the main home view
 class HomeViewController: UIViewController, DatabaseListener {
     let healthStore = HKHealthStore()
     func onMealsChange(change: DatabaseChange, meals: [Meals]) {
@@ -46,30 +47,20 @@ class HomeViewController: UIViewController, DatabaseListener {
         if HKHealthStore.isHealthDataAvailable(){
             
         }
-        
-        
-        //welcomeLabel.text
-        // Do any additional setup after loading the view.
     }
     
+    // Adds the view as a listener
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         databaseController?.addListener(listener: self)
     }
     
+    // Removes the view as a listener
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         databaseController?.removeListener(listener: self)
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -7,12 +7,13 @@
 
 import UIKit
 
+// This class handles the sign in logic
 class SignInViewController: UIViewController, AuthenticationListener {
     func signUpSuccess() {
         
     }
     
-    func signInSuccess() {
+    func signInSuccess() { // If sign in is successful perform the segue and log the user in
         performSegue(withIdentifier: "signInSegue", sender: Any?.self)
     }
     
@@ -23,12 +24,13 @@ class SignInViewController: UIViewController, AuthenticationListener {
     weak var databaseController : FirebaseController?
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
     @IBAction func signIn(_ sender: Any) {
         guard let email = emailTextField.text , let password = passwordTextField.text else{
             return
         }
         DispatchQueue.main.async {
-            self.databaseController?.signIn(email: email, password: password)
+            self.databaseController?.signIn(email: email, password: password) // Sign the user in
         }
     }
     @IBAction func signUp(_ sender: Any) {
@@ -44,7 +46,7 @@ class SignInViewController: UIViewController, AuthenticationListener {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.databaseController?.signOut()
+        self.databaseController?.signOut() // Make sure the user is signed out if this view is loaded
         
     }
 

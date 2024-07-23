@@ -23,5 +23,4 @@ class User: NSObject,Codable {
     var name: String?
     var workouts: [Workout] = []
     var meals: [Meals] = []
-   // var workout: Workout?
 }
